@@ -161,16 +161,17 @@ const AppointmentReset = () => {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 width: moderateScale(350),
-                height: moderateScale(180),
+                height: moderateScale(230),
                 backgroundColor: 'white',
                 shadowColor: 'grey',
-                borderWidth: 0.8,
-                borderColor: 'grey',
+                borderWidth: scale(2),
+                borderColor: '#93121B',
                 borderRadius: moderateScale(10),
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.5,
                 elevation: 3,
-                marginBottom: moderateScale(10)
+                marginBottom: moderateScale(10),
+                backgroundColor: '#E8E8E8',
             }}>
 
             <View
@@ -178,24 +179,37 @@ const AppointmentReset = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
-                    width: '98%',
-                    height: moderateScale(170),
-
+                    width: '95%',
+                    height: moderateScale(200),
+                    backgroundColor: 'white'
                 }}>
                 <View style={{
                     alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    flexDirection: 'column',
-                    width: '78%',
+                    justifyContent: 'center',
+                    width: '77%',
                 }}>
                     <View style={{
-                        alignItems: 'flex-start',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        width: '100%',
-                        height: moderateScale(30),
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        flexDirection: 'row',
+                        height: moderateScale(35),
                     }}>
-                        <Text style={{ fontSize: scale(17), textAlign: 'center', color: 'black', paddingLeft: 3, fontWeight: '400' }}>Organization Name :-</Text>
+                        <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Organization Name :-</Text>
+                    </View>
+                    <View style={{
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        flexDirection: 'row',
+                    }}>
+                        <Text style={{ fontSize: scale(15), paddingLeft: scale(15), width: '100%', }}>{item.name}</Text>
+                    </View>
+                    <View style={{
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        flexDirection: 'row',
+                        height: moderateScale(35),
+                    }}>
+                        <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Organization Address :-</Text>
                     </View>
                     <View style={{
                         alignItems: 'flex-start',
@@ -203,24 +217,7 @@ const AppointmentReset = () => {
                         flexDirection: 'column',
                         width: '100%',
                     }}>
-                        <Text style={{ fontSize: scale(15), paddingLeft: 3, }}>{item.name}</Text>
-                    </View>
-                    <View style={{
-                        alignItems: 'flex-start',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        width: '100%',
-                        height: moderateScale(30),
-                    }}>
-                        <Text style={{ fontSize: scale(17), textAlign: 'center', color: 'black', paddingLeft: 3, fontWeight: '400' }}>Organization Address :-</Text>
-                    </View>
-                    <View style={{
-                        alignItems: 'flex-start',
-                        justifyContent: 'center',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
-                        <Text style={{ fontSize: scale(15), paddingLeft: 3, }}>{item.address_1}</Text>
+                        <Text style={{ fontSize: scale(15), paddingLeft: scale(15), width: '100%', }}>{item.address_1}</Text>
                     </View>
 
                 </View>

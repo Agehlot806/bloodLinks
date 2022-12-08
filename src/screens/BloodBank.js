@@ -162,7 +162,7 @@ const BloodBank = props => {
             flexDirection: 'row',
             height: moderateScale(35),
           }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Labs Name :-</Text>
+            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Blood Banks Name :-</Text>
           </View>
           <View style={{
             alignItems: 'center',
@@ -177,7 +177,7 @@ const BloodBank = props => {
             flexDirection: 'row',
             height: moderateScale(35),
           }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Labs Address :-</Text>
+            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Blood Banks Address :-</Text>
           </View>
           <View style={{
             alignItems: 'flex-start',

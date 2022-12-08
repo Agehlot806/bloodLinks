@@ -163,7 +163,7 @@ const Hospital = props => {
             flexDirection: 'row',
             height: moderateScale(35),
            }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Labs Name :-</Text>
+            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Hospitals Name :-</Text>
           </View>
           <View style={{
             alignItems: 'center',
@@ -178,7 +178,7 @@ const Hospital = props => {
             flexDirection: 'row',
             height: moderateScale(35),
            }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Labs Address :-</Text>
+            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Hospitals Address :-</Text>
           </View>
           <View style={{
             alignItems: 'flex-start',

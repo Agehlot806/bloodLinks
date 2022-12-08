@@ -19,7 +19,7 @@ const Splash = props => {
   useFocusEffect(
     React.useCallback(() => {
       setTimeout(() => {
-        // navigation.navigate("Maps")
+        // navigation.navigate("RequestAppointment")
         navigation.navigate("Slider")
       }, 1000)
     }, [])

@@ -1,17 +1,13 @@
-
-import * as React from 'react';
-// import {Image} from 'react-native-elements/dist/image/Image';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {createDrawerNavigator} from '@react-navigation/drawer';
 import Splash from '../screens/Splash';
 import Slider from '../screens/Slider';
 import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Hospitals from '../screens/Hospitals';
 import BloodBank from '../screens/BloodBank';
-import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 import BottomNav from '../navigation/BottomNav';
 import Otp from '../screens/Otp';
