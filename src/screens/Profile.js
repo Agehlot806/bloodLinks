@@ -16,6 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect, StackActions } from '@react-navigation/native';
 import { moderateScale, scale } from 'react-native-size-matters';
 import DrawerHeader from '../Components/DrawerHeader';
+import image from '../assets/Images';
 const Profile = props => {
   const navigation = props.navigation;
   const [name, setname] = useState('');
@@ -81,17 +82,17 @@ const Profile = props => {
   }
   const profFunct = async () => {
     await AsyncStorage.removeItem('User')
-     navigation.dispatch(StackActions.replace('Login'))
+    navigation.dispatch(StackActions.replace('Login'))
   }
   return (
     <SafeAreaView style={styles.container}>
       <StatusTopBar />
       <DrawerHeader name={'My Profile'} image1={true} />
       <View style={styles.profile}>
-        <View style={{ height: moderateScale(165), width: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-          <View style={{ height: moderateScale(170), width: '60%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EF486A', borderRadius: 100, flexDirection: 'row' }}>
+        <View style={{ height: moderateScale(165), width: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',}}>
+          <View style={{ height: moderateScale(150), width: '50%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EF486A', borderRadius: 100, flexDirection: 'row' }}>
             <Image
-              style={{ height: height * 0.23, width: '95%', borderRadius: 90 }}
+              style={{ height: height * 0.19, width: '95%', borderRadius: 100 }}
               resizeMode='cover'
               source={{ uri: saveaImage }}
             />
@@ -108,7 +109,7 @@ const Profile = props => {
           <Text style={styles.profileName}>{name} {Lastname}</Text>
         </View>
       </View>
-      <ScrollView style={{ flex: 1, width: '100%' }}>
+      <ScrollView style={{ flex: 1, width: '100%',   }}>
         <View style={styles.profileDeatils}>
           <View style={styles.imgCon}>
             <Image
@@ -141,7 +142,7 @@ const Profile = props => {
         <View style={styles.profileDeatils}>
           <View style={styles.imgCon}>
             <Image
-              style={styles.icon}
+              style={[styles.icon,{height: height * 0.05,width: width * 0.09,}]}
               source={require('../assets/icons/lavatory.png')}
             />
 
@@ -168,11 +169,11 @@ const Profile = props => {
           </View>
           <Text style={styles.profileDeatilsTitle}>{address}</Text>
         </View>
-        <TouchableOpacity onPress={() => profFunct()} style={styles.profileDeatils}>
+        <TouchableOpacity onPress={() => profFunct()} style={[styles.profileDeatils,{marginBottom:scale(80)}]}>
           <View style={styles.imgCon}>
             <Image
               style={styles.icon}
-              source={require('../assets/icons/LogOut.png')}
+              source={image.logOut}
             />
 
           </View>
@@ -191,23 +192,23 @@ const styles = StyleSheet.create({
   },
   profile: {
     backgroundColor: 'rgba(254,230,230,255)',
-    alignItems: 'center',
     borderRadius: 100 / 10,
-    paddingVertical: height * 0.025,
+    paddingVertical: height * 0.010,
     width: '80%',
-    elevation: 2,
+    elevation: 3,
     shadowColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
     shadowOffset: {
-      width: 0,
-      height: 8,
+      width: 3,
+      height: 2,
     },
+    shadowColor: 'lightgrey',
     shadowOpacity: 0.7,
     shadowRadius: 8,
-    top: 25,
-    marginBottom: moderateScale(40),
-    paddingTop: moderateScale(30)
+    top: 20,
+    marginBottom: moderateScale(23),
+    paddingTop: moderateScale(18)
   },
   profileName: {
     color: '#EF486A',
@@ -250,6 +251,7 @@ const styles = StyleSheet.create({
     height: height * 0.04,
     width: width * 0.08,
     marginRight: width * 0.05,
+    tintColor:'#b31d27'
   },
 });
 export default Profile;

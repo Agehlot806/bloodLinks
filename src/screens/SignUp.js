@@ -38,7 +38,7 @@ const SignUp = props => {
   const [phone, setphone] = useState('');
   const [phoneError, setphoneError] = useState('');
   const [gander, setgander] = useState('');
-   const [address, setaddress] = useState('');
+  const [address, setaddress] = useState('');
   const [addressError, setaddressError] = useState('');
   const [state, setstate] = useState(null);
   const [isFocus1, setIsFocus1] = useState(false);
@@ -208,21 +208,7 @@ const SignUp = props => {
         if (Response.status == true) {
           alert("user Signup successfully");
           navigation.navigate('OtpSinup', {
-            // name:name,
             deta: data,
-            // mid_name:"gurjar",
-            // lastName:lastName,
-            // fName:fName,
-            // marital:'Married',
-            // Number:phone,
-            // gender:gander,
-            // blood:blood,
-            // states:1,
-            // districts:18,
-            // cities:6581,
-            // address:address,
-            // incode:'456321',
-            // email:email
           })
         } else {
           alert("this username is already exists");
@@ -454,9 +440,9 @@ const SignUp = props => {
                     </View>
                   </TouchableOpacity>
 
-                  <View style={{ flexDirection: 'row', width: '100%', height: moderateScale(50), alignItems: 'center', justifyContent: 'center', }}>
+                  <View style={{ flexDirection: 'row',  height: moderateScale(50), alignItems: 'center', justifyContent: 'center', }}>
                     <Text
-                      style={{ fontSize: scale(14), fontWeight: '400', color: 'grey' }}>
+                      style={{ fontSize: scale(14), fontWeight: '400', color: 'grey',width: '60%', }}>
                       Allready have an account
                     </Text>
                     <TouchableOpacity
@@ -465,6 +451,7 @@ const SignUp = props => {
                         style={{
                           textDecorationLine: 'underline',
                           fontSize: scale(13),
+                          width:scale(40), 
                           fontWeight: '600',
                           marginLeft: 5,
                           color: 'black',
@@ -490,8 +477,8 @@ const styles = StyleSheet.create({
   },
   loginbg: {
     justifyContent: 'center',
-    marginBottom: moderateScale(10)
-  },
+    marginBottom: moderateScale(10),
+   },
   loginTopimg: {
     justifyContent: 'center',
     height: moderateScale(170),

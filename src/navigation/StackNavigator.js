@@ -14,8 +14,7 @@ import Otp from '../screens/Otp';
 import OtpSinup from '../screens/OtpSinup';
 import DonerList from '../screens/DonerList';
 import RequestList from '../screens/RequestList';
-import Maps from '../screens/Mapss';
-
+ 
 import Notificationscreen from '../screens/Notificationscreen';
 import ScheduleAppointment from '../screens/ScheduleAppointment';
 import AppointmentReset from '../screens/AppointmentReset';
@@ -29,24 +28,11 @@ import RequestAppointment from '../screens/RequestAppointment';
 import RequestAppReset from '../screens/RequestAppointmentReset';
 import ProfileEdit from '../screens/ProfileEdit';
 import Labs from '../screens/Labs';
-import BloodMap from '../screens/BloodMap';
-import HospitalMap from '../screens/HospitalMap';
-import LabMap from '../screens/LabMap';
-
-
-
-
-
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-// const Drawer = createDrawerNavigator();
-
-// const Drawer = createDrawerNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -73,26 +59,9 @@ const StackNavigator = () => {
         component={BottomNav}
         options={{ headerShown: false }}
       />
-
-
       <Stack.Screen
         name="Hospitals"
         component={Hospitals}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="BloodMap"
-        component={BloodMap}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="HospitalMap"
-        component={HospitalMap}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LabMap"
-        component={LabMap}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -100,19 +69,11 @@ const StackNavigator = () => {
         component={Labs}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name="BloodBank"
         component={BloodBank}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="Maps"
-        component={Maps}
-        options={{ headerShown: false }}
-      />
-
-
       <Stack.Screen
         name="ScheduleAppointment"
         component={ScheduleAppointment}

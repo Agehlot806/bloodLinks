@@ -74,10 +74,10 @@ const HOME = () => {
         style={{
           alignItems: 'center',
           justifyContent: 'center',
-          flexDirection: 'column',
-          width: moderateScale(350),
+          flexDirection: 'row',
+          width: moderateScale(360),
           height: moderateScale(180),
-          marginHorizontal: scale(16),
+          marginHorizontal: scale(10),
           backgroundColor: 'white',
           shadowColor: 'grey',
           borderWidth: scale(2),
@@ -140,19 +140,11 @@ const HOME = () => {
     const IdUser = await AsyncStorage.getItem('User')
     console.log('userId ------------>>>async', IdUser)
   }
-
-
-  let animation = React.createRef();
-  useEffect(() => {
-    animation?.current?.play();
-  }, [ajaxRequesting]);
-  return (
-
-    <View style={styles.container}>
-      <StatusTopBar />
+  const HeaderHome = () => {
+    return (
       <View style={styles.homeHeader}>
         <View style={styles.homeSearchHeader}>
-          <TouchableOpacity style={styles.heardingMenu} onPress={() => navigation.dispatch(DrawerActions.openDrawer())} >
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} >
             <Image
               style={styles.heardingMenuImg}
               source={image.menu}
@@ -181,36 +173,27 @@ const HOME = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView>
-        <SwiperFlatList
-          autoplay
-          autoplayDelay={3}
-          autoplayLoop
-          index={2}
-          data={data}
-          renderItem={_renderItem}
-        />
+    )
+  }
 
-        {/* {
-            ajaxRequesting
-              ? <LottieView
-                ref={animation}
-                loop={true}
-                style={{
-                  width: 150,
-                  height: 150,
-                  position: 'absolute',
-                  top: 170,
-                  left: 60,
-                  // loop: true,
-                  autoplay: true,
-                }}
-                source={require('../assets/icons/loader.json')}
-              />
-              : null
-          } */}
+  return (
 
-        <View style={{ height: moderateScale(170), flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(7),margin: scale(4) }}>
+    <View style={styles.container}>
+      <StatusTopBar />
+      <HeaderHome />
+      <ScrollView >
+        <View style={{ height: scale(180), alignItems: 'center', justifyContent: 'center' }}>
+          <SwiperFlatList
+            autoplay
+            autoplayDelay={3}
+            autoplayLoop
+            index={2}
+            data={data}
+            renderItem={_renderItem}
+          />
+        </View>
+
+        <View style={{ height: moderateScale(170), flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(7), margin: scale(4) }}>
           <TouchableOpacity onPress={() => navigation.navigate('BloodBank')} style={{
             height: moderateScale(150),
             width: '30%',
@@ -326,14 +309,16 @@ const HOME = () => {
           </TouchableOpacity>
 
         </View>
-        <SwiperFlatList
-          autoplay
-          autoplayDelay={3}
-          autoplayLoop
-          index={2}
-          data={data1}
-          renderItem={_renderItem}
-        />
+        <View style={{ height: scale(260), alignItems: 'center', justifyContent: 'center' }}>
+          <SwiperFlatList
+            autoplay
+            autoplayDelay={3}
+            autoplayLoop
+            index={2}
+            data={data1}
+            renderItem={_renderItem}
+          />
+        </View>
       </ScrollView>
 
     </View>
@@ -364,6 +349,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: height * 0.03,
     alignItems: 'center',
+    justifyContent:'center'
   },
   headerBtn: {
     height: moderateScale(50),
@@ -371,7 +357,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  container: { flex: 1, backgroundColor: 'white' },
+  container: { flex: 1, backgroundColor: 'white', },
   child: { width, justifyContent: 'center' },
   text: { fontSize: width * 0.5, textAlign: 'center' },
   seeDonor: {
@@ -402,8 +388,8 @@ const styles = StyleSheet.create({
   },
   heardingMenuImg: {
     height: scale(31),
-    width: scale(32),
-    marginLeft: scale(2),
+    width: scale(31),
+    marginLeft: scale(8),
   },
   headerContent: {
     flexDirection: 'row',

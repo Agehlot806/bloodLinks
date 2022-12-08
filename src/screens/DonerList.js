@@ -164,13 +164,13 @@ const DonerList = props => {
         width: moderateScale(350),
         height: moderateScale(180),
         backgroundColor: 'white',
-        shadowColor: 'grey',
-        borderWidth: scale(2),
+        shadowColor: '#93121B',
+        borderWidth: scale(1),
         borderColor: '#93121B',
         borderRadius: moderateScale(10),
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
-        elevation: 3,
+        elevation: 5,
         marginBottom: moderateScale(10),
       }}>
 

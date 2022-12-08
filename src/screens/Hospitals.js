@@ -8,14 +8,16 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
-  ActivityIndicator, StyleSheet,Pressable
+  ActivityIndicator, StyleSheet, Pressable
 } from 'react-native';
 import { moderateScale, scale } from 'react-native-size-matters';
-import { COLOR } from '../constants/colorConstants';
+import image from '../assets/Images';
 import DrawerHeader from '../Components/DrawerHeader';
 import StatusTopBar from '../Components/StatusTopBar';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import { PhoneCall } from '../Components/PhoneCall';
+import { onShare } from '../Components/ShareCom';
+import { ComponentMap } from '../Components/MapsComp';
 const { width, height } = Dimensions.get('window');
 
 const Hospital = props => {
@@ -116,88 +118,78 @@ const Hospital = props => {
       </View>
     )
   }
-  const ValueNavi = (item) => {
-    console.log('hospital param get value',item)
-    navigation.navigate('HospitalMap', {
-      LatNav: item.latitude,
-      LongNav: item.longitude,
-    })
+  const LatLongOpen = (item) => {
+    var latitude = (item.latitude)
+    var longitude = (item.longitude)
+    ComponentMap(latitude, longitude)
   }
+  const ShareComponent = (item) => {
+    var name = 'Hospitals Name'
+    var address = 'Hospitals Address'
+    onShare(item, name, address)
+  }
+
   const renderItem = ({ item }) => (
-    <Pressable onPress={()=>ValueNavi(item)}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        width: moderateScale(350),
-        height: moderateScale(200),
-        backgroundColor: 'white',
-        shadowColor: 'grey',
-        borderWidth: 0.8,
-        borderColor: 'grey',
-        borderRadius: moderateScale(10),
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        elevation: 3,
-        marginBottom: moderateScale(10),
-        backgroundColor: '#E8E8E8',
-      }}>
-
-<View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'row',
-          width: '95%',
-          height: moderateScale(180),
-          backgroundColor: 'white'
-        }}>
-        <View style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '77%',
-         }}>
-          <View style={{
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            flexDirection: 'row',
-            height: moderateScale(35),
-           }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Hospitals Name :-</Text>
-          </View>
-          <View style={{
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            flexDirection: 'row',
-           }}>
-            <Text style={{ fontSize: scale(15), paddingLeft: scale(15), width: '100%', }}>{item.name}</Text>
-          </View>
-          <View style={{
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            flexDirection: 'row',
-            height: moderateScale(35),
-           }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Hospitals Address :-</Text>
-          </View>
-          <View style={{
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            width: '100%',
-           }}>
-            <Text style={{ fontSize: scale(15), paddingLeft: scale(15), width: '100%', }}>{item.address_1}</Text>
-          </View>
-
-        </View>
-        <View style={{ height: moderateScale(85), width: '20%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#adadad', borderRadius: moderateScale(6), marginRight: moderateScale(5), marginLeft: moderateScale(4), }}>
+    <View style={styles.card}  >
+      <View style={styles.textContent}>
+        <View style={{ width: scale(70), alignItems: 'center', justifyContent: 'center' }}>
           <Image
-            style={{ height: 80, width: 80 }}
-            source={require('../assets/icons/bloodDrop.png')}
+            source={image.bloodDrop}
+            style={styles.cardImage}
+            resizeMode="cover"
           />
         </View>
+        <View style={{ width: '73%', padding: scale(5), }}>
+          <Text numberOfLines={2} style={styles.cardtitle}>{item.name}</Text>
+          <Text numberOfLines={3} style={styles.cardDescription}>{item.address_1}</Text>
+        </View>
       </View>
-    </Pressable>
+      <View style={{ height: scale(50), alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row', }}>
+        <View
+          style={{
+            width: "11%",
+            height: "65%",
+            borderRadius: scale(40),
+            backgroundColor: 'white',
+            borderWidth: 2,
+            borderColor: '#DAE5F3',
+            marginRight: scale(10),
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+          <TouchableOpacity onPress={() => LatLongOpen(item)}>
+            <Image
+              source={image.google}
+              style={{
+                width: scale(20),
+                height: scale(20),
+              }}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={() => ShareComponent(item)} style={{ height: scale(35), width: scale(45), alignItems: 'center', justifyContent: 'center', }}>
+          <Image
+            source={image.share}
+            style={{
+              width: scale(50),
+              height: scale(50),
+            }}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={{ height: scale(35), width: scale(45), alignItems: 'center', justifyContent: 'center', }} onPress={() => PhoneCall()}>
+          <Image
+            source={image.phone}
+            style={{
+              width: scale(30),
+              height: scale(30),
+            }}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 
   return (
@@ -207,7 +199,7 @@ const Hospital = props => {
       <ScrollView>
         <View style={{ flex: 1, flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(20), marginBottom: moderateScale(80), }}>
           <View style={{ flexDirection: 'column', height: moderateScale(100), width: '90%', }}>
-            <View style={{ flex: 1, flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', }}>
+            <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between', }}>
 
               <Dropdown
                 style={[styles.input, isFocus1 && { borderColor: '#85060F' }]}
@@ -216,7 +208,6 @@ const Hospital = props => {
                 inputSearchStyle={styles.inputSearchStyle}
                 itemContainerStyle={{ borderColor: 'gray', borderWidth: 1.5, }}
                 containerStyle={{ borderColor: 'gray', borderWidth: 1, }}
-                activeColor='#FDDDE0'
                 dropdownPosition='bottom'
                 data={CityList}
                 search
@@ -243,7 +234,6 @@ const Hospital = props => {
                 inputSearchStyle={styles.inputSearchStyle}
                 itemContainerStyle={{ borderColor: 'gray', borderWidth: 1.5, }}
                 containerStyle={{ borderColor: 'gray', borderWidth: 1, }}
-                activeColor='#FDDDE0'
                 dropdownPosition='bottom'
                 data={PinList}
                 search
@@ -260,22 +250,18 @@ const Hospital = props => {
                   console.log('map data on change pin', item)
                   setIsFocus2(false);
                 }}
-
               />
-
-
-
             </View>
 
           </View>
           <View style={{ alignItems: 'center', flexDirection: 'column', justifyContent: 'center', height: moderateScale(50), width: '100%', marginTop: moderateScale(5), marginBottom: moderateScale(15) }}>
             <View style={{ height: moderateScale(50), width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-              <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(10), marginRight: moderateScale(5), }}>
+              <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', borderRadius: moderateScale(2), marginRight: moderateScale(5), }}>
                 <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                   Reset
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => Filter()} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(10), marginLeft: moderateScale(5), }}>
+              <TouchableOpacity onPress={() => Filter()} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black', borderRadius: moderateScale(2), marginLeft: moderateScale(5), }}>
                 <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                   Filter
                 </Text>
@@ -310,12 +296,12 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 45,
     fontSize: 18,
-    width: '90%',
+    width: '82%',
     marginLeft: 16,
   },
   input: {
     height: height * 0.07,
-    width: width * 0.8,
+    width: scale(154),
     borderWidth: scale(1.40),
     padding: width * 0.03,
     borderRadius: 5,
@@ -324,6 +310,42 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: 'black',
     marginBottom: scale(15)
+  },
+  card: {
+    elevation: 2,
+    backgroundColor: "#FFF",
+    borderWidth: 0.8,
+    borderColor: 'grey',
+    borderRadius: moderateScale(10),
+    marginBottom: moderateScale(10),
+    // marginHorizontal:moderateScale(25),
+    shadowColor: '#93121B',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: moderateScale(185),
+    width: scale(295),
+    overflow: "hidden",
+  },
+  textContent: {
+    height: moderateScale(130),
+    padding: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cardImage: {
+    width: scale(45),
+    height: scale(45),
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  cardtitle: {
+    fontSize: scale(15),
+    fontWeight: "bold",
+  },
+  cardDescription: {
+    fontSize: scale(16),
+    color: "#444",
   },
 });
 

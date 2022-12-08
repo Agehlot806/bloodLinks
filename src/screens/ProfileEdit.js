@@ -19,7 +19,7 @@ const { width, height } = Dimensions.get('window');
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import ImagePicker from 'react-native-image-crop-picker';
- import { moderateScale, scale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
 import DrawerHeader from '../Components/DrawerHeader';
 const ProfileEdit = props => {
     const navigation = props.navigation;
@@ -164,7 +164,7 @@ const ProfileEdit = props => {
                 <View style={styles.profile}>
                     <View style={{ height: moderateScale(150), width: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', marginTop: moderateScale(20) }}>
 
-                        <View style={{ height: moderateScale(170), width: '60%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EF486A', borderRadius: 100, flexDirection: 'row' }}>
+                        <View style={{ height: moderateScale(175), width: '59%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EF486A', borderRadius: 100, flexDirection: 'row' }}>
                             <Image
                                 style={{ height: height * 0.23, width: '95%', borderRadius: 90 }}
                                 resizeMode='cover'
@@ -294,7 +294,7 @@ const ProfileEdit = props => {
                 <View style={styles.profileDeatils}>
                     <View style={styles.imgCon}>
                         <Image
-                            style={styles.icon}
+                            style={[styles.icon, { height: height * 0.05, width: width * 0.09, }]}
                             source={require('../assets/icons/lavatory.png')}
                         />
 
@@ -362,18 +362,17 @@ const ProfileEdit = props => {
                     />
                 </View>
 
-                 
-                 
+
+
                 <TouchableOpacity onPress={() => ProfileEdit1()} style={{
                     marginBottom: moderateScale(15),
                     alignItems: 'center',
                     justifyContent: 'flex-start',
-                    backgroundColor: '#1e8496',
+                    backgroundColor: '#85060F',
                     width: '70%',
                     marginLeft: scale(50),
                     height: moderateScale(60),
                     elevation: 6,
-                    color: "black",
                     flexDirection: 'row',
                     borderRadius: moderateScale(15)
                 }}>
@@ -383,14 +382,14 @@ const ProfileEdit = props => {
                         justifyContent: 'center',
                     }}>
                         <Image
-                            style={styles.icon}
+                            style={[styles.icon, { tintColor: 'white' }]}
                             source={require('../assets/icons/refresh.png')}
                         />
 
                     </View>
                     <Text style={{
-                        fontSize: width * 0.05,
-                        color: 'black',
+                        fontSize:scale(17.5),
+                        color: 'white',
                         paddingLeft: scale(15),
                         textAlign: 'center'
                     }}>Save Changes</Text>
@@ -466,7 +465,8 @@ const styles = StyleSheet.create({
     icon: {
         height: height * 0.04,
         width: width * 0.08,
-        marginRight: width * 0.03,
+        marginRight: width * 0.05,
+        tintColor: '#b31d27'
     },
 });
 export default ProfileEdit;

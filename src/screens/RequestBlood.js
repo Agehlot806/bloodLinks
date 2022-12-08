@@ -249,11 +249,14 @@ const RequestBlood = () => {
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: 'center', backgroundColor: "white" }}>
             <DrawerHeader name={'Request for Blood'} image1={false} />
-            <ProgressSteps>
+            <ProgressSteps activeStepIconBorderColor={'#93121B'}
+            completedProgressBarColor={'#93121B'}completedStepIconColor={'#93121B'}
+            activeLabelColor={'#93121B'}>
                 <ProgressStep
                     label="First Step"
                     onNext={onNextStep}
                     nextBtnDisabled={false}
+                    // #93121B
                 >
                     <View style={{
                         alignItems: 'center', width: '100%',
@@ -275,7 +278,8 @@ const RequestBlood = () => {
                                 marginLeft: scale(35),
                                 justifyContent: "center",
                                 marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
+                                borderRadius: scale(10),
+                                borderWidth: 0.8,
                                 borderColor: "grey",
                                 margin: scale(8)
 
@@ -316,7 +320,6 @@ const RequestBlood = () => {
                             height: scale(50),
                             flexDirection: "row", width: "100%", marginTop: scale(12),
                         }}>
-
                             <View style={{
                                 zIndex: 1,
                                 width: "80%",
@@ -329,8 +332,6 @@ const RequestBlood = () => {
                                 <DropDownPicker
                                     dropDownDirection="BOTTOM"
                                     open={open1}
-                                    // onOpen={Close2}
-                                    // 
                                     value={value1}
                                     items={[
                                         { label: 'Male', value: 'Male' },
@@ -1722,7 +1723,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: 'gray',
+        shadowColor: 'white',
         shadowborder: 1,
         paddingLeft: scale(15), fontSize: scale(15),
         shadowOffset: { width: 1, height: 1 },

@@ -1,17 +1,3 @@
-// const BottomNav = () => {
-//     return (
-//       // <NavigationContainer>
-//       <Tab.Navigator>
-//         <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
-//         <Tab.Screen name="Search" component={Search} />
-//         <Tab.Screen name="Profile" component={Profile} />
-
-//       </Tab.Navigator>
-//       // </NavigationContainer>  
-//     );
-//   };
-
-
 import React from "react";
 import {
     View,
@@ -26,19 +12,40 @@ import DonerList from '../screens/DonerList';
 import Profile from '../screens/Profile';
 import image from '../assets/Images';
 
-
-
 const Tab = createBottomTabNavigator()
-
-
-
 const Tabs = () => {
     return (
-        <Tab.Navigator >
+        <Tab.Navigator
+
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveBackgroundColor: 'lightgrey',
+                // tabBarVisibilityAnimationConfig: 'pink',
+                tabBarStyle: {
+                    height: 70,
+                    position: 'absolute',
+                    bottom: 10,
+                    right: 10,
+                    left: 20,
+                    borderRadius: 10,
+                    shadowColor: '#93121B',
+                    shadowOffset: { width: 20, height: 6 },
+                    shadowOpacity: 5,
+                    elevation: 2,
+                }
+            }}>
             <Tab.Screen
                 name="Home1"
                 component={Home1}
                 options={{
+                    tabBarLabelStyle: {
+                        height: 23,
+                        fontSize: 13,
+                        textAlign: 'center',
+                        width: 90,
+                        fontWeight: '700',
+                        // color: isFocused ? 'red' : '#222'
+                    },
                     headerShown: false,
                     title: 'Home',
                     tabBarIcon: ({ color }) => (
@@ -46,62 +53,85 @@ const Tabs = () => {
                             source={image.homeIcon}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
+                                width: 35,
+                                height: 35,
                                 tintColor: '#85060F'
                                 // tintColor: focused ? 'white' : 'gray'
                             }}
                         />
                     ),
-                    tabBarLabel: 'Home',
                 }}
             />
             <Tab.Screen
-                name="RequestList"
-                component={RequestList}
-
-                options={{
-                    headerShown: false,
-                    title: 'RequestList',
-                    tabBarIcon: ({ color }) => (
-                        <Image
-                            source={require("../assets/Images/donor.png")}
-                            resizeMode="contain"
-                            style={{
-                                width: 30,
-                                height: 30,
-                                // tintColor: focused ? 'white' : 'gray'
-                            }}
-                        />
-                    ),
-                    tabBarLabel: 'RequestList',
-                }}
-            />
-            <Tab.Screen
-                name="DonerList"
+                name="Donate"
                 component={DonerList}
                 options={{
+                    tabBarLabelStyle: {
+                        height: 23,
+                        fontSize: 13,
+                        textAlign: 'center',
+                        width: 90,
+                        fontWeight: '700',
+                    },
                     headerShown: false,
-                    title: 'Profile',
+                    title: 'Donate',
                     tabBarIcon: ({ color }) => (
                         <Image
-                            source={require("../assets/icons/address.png")}
+                            source={image.donetBlood}
                             resizeMode="contain"
                             style={{
-                                width: 30,
-                                height: 30,
-                                // tintColor: focused ? 'white' : 'gray'
+                                width: 34,
+                                height: 34,
+                                fontSize: 15,
+                                fontWeight: 'bold',
+                                tintColor: '#85060F'
                             }}
                         />
                     ),
-                    tabBarLabel: 'DonerList',
+                    // tabBarLabel: 'DonerList',
                 }}
             />
+            <Tab.Screen
+                name="Request Blood"
+                component={RequestList}
+                options={{
+                    tabBarLabelStyle: {
+                        height: 23,
+                        fontSize: 12.8,
+                        fontWeight: '600',
+                        textAlign: 'center',
+                        width: 90,
+                    },
+                    headerShown: false,
+                    title: 'Request Blood',
+                    tabBarIcon: ({ color }) => (
+                        <Image
+                            source={image.request}
+                            resizeMode="contain"
+                            style={{
+                                fontSize: 15,
+                                fontWeight: 'bold',
+                                width: 34,
+                                height: 34,
+                                tintColor: '#85060F'
+                            }}
+                        />
+                    ),
+                }}
+            />
+
             <Tab.Screen
                 name="Profile"
                 component={Profile}
 
                 options={{
+                    tabBarLabelStyle: {
+                        height: 23,
+                        fontSize: 12.8,
+                        fontWeight: '600',
+                        textAlign: 'center',
+                        width: 90,
+                    },
                     headerShown: false,
                     title: 'Profile',
                     tabBarIcon: ({ color }) => (
@@ -110,17 +140,15 @@ const Tabs = () => {
                             resizeMode="contain"
                             style={{
                                 tintColor: '#85060F',
-                                width: 30,
-                                height: 30,
-                                // tintColor: focused ? 'white' : 'gray'
+                                width: 35,
+                                height: 35,
                             }}
                         />
                     ),
-                    tabBarLabel: 'Profile',
                 }}
             />
 
-        </Tab.Navigator>
+        </Tab.Navigator >
     )
 }
 
