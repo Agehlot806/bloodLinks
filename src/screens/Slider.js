@@ -14,36 +14,35 @@ const vw = Dimensions.get('window').width / 100;
 const vh = Dimensions.get('window').height / 100;
 const { width, height } = Dimensions.get('window');
 import { COLOR } from '../constants/colorConstants';
+import { scale } from 'react-native-size-matters';
 const slides = [
   {
     key: 1,
-    title: 'Donate Blood',
-    text: 'Donate Blood - Help Building Community',
+    title: 'Donate Blood ',
+    text: 'Donate Blood - Help Building Community ',
     image: require('../assets/Images/slider1.png'),
 
     backgroundColor: '#59b2ab',
   },
   {
     key: 2,
-    title: 'Ralse Request',
-    text: 'Building Nation',
+    title: 'Ralse Request  ',
+    text: 'Building Nation ',
     image: require('../assets/Images/slider2.png'),
 
     backgroundColor: '#febe29',
   },
   {
     key: 3,
-    title: 'Discover Products',
-    text: 'Automated WorkFlows',
+    title: 'Discover Products ',
+    text: 'Automated WorkFlows ',
     image: require('../assets/Images/slider3.png'),
-
     backgroundColor: '#22bcb5',
   },
   {
     key: 4,
-    title: 'Security and Privacy',
-    text: 'Adherence to health and data',
-    text1: 'Privacy standards',
+    title: 'Security and Privacy ',
+    text: 'Adherence to health and data ',
     image: require('../assets/Images/slider4.png'),
     backgroundColor: '#22bcb5',
   },
@@ -51,27 +50,25 @@ const slides = [
 const Slider = (props) => {
   const navigation = props.navigation;
   const [showRealApp, setShowRealApp] = useState(false);
- 
+
   const renderItem = ({ item }) => {
     return (
-       
+
       <View>
         <StatusTopBar />
         <ImageBackground source={item.image} style={styles.image}>
           <View style={styles.setmargin}>
             <View style={styles.imgTxt}>
-              <Text style={styles.Txt}>{item.title}</Text>
-              <Text
-                style={[styles.Txt, { fontWeight: '400', fontSize: width * 0.05 }]}>
-                {item.text}
-              </Text>
-              <Text
-                style={[
-                  styles.Txt,
-                  { fontWeight: '400', fontSize: width * 0.05, marginTop: 0 },
-                ]}>
-                {item.text1}
-              </Text>
+              <View style={{ width: '80%', alignItems: 'center', justifyContent: 'center', }}>
+                <Text style={styles.Txt}>{item.title} </Text>
+              </View>
+              <View style={{ width: '80%', alignItems: 'center', justifyContent: 'center', }}>
+                <Text
+                  style={[styles.Txt, { fontWeight: '400', fontSize: scale(14), }]}>
+                  {item.text}
+                </Text>
+              </View>
+
             </View>
           </View>
         </ImageBackground>
@@ -87,12 +84,12 @@ const Slider = (props) => {
   //   console.log('heelooo---UserId-----async---->', IdUser)
   //   setUseId(IdUser)
   // }
-  const onDone =async() => {
+  const onDone = async () => {
     setShowRealApp(true);
     const IdUser = await AsyncStorage.getItem('User')
-    if (IdUser == null){
+    if (IdUser == null) {
       navigation.navigate("Login")
-     }else{
+    } else {
       navigation.navigate('Home')
     }
   };
@@ -130,14 +127,15 @@ const styles = StyleSheet.create({
     top: width * 1.18,
   },
   imgTxt: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    flexDirection: 'column',
   },
   Txt: {
     color: COLOR.WHITE,
-    fontSize: width * 0.06,
+    fontSize: scale(16),
     fontWeight: 'bold',
-    marginTop: height * 0.025,
+    marginTop: height * 0.025, width: '100%'
   },
 });
 export default Slider;

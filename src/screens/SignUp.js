@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
+  Platform,
   TextInput,
   ImageBackground,
   Image,
@@ -23,6 +23,7 @@ import { moderateScale, moderateVerticalScale, scale } from 'react-native-size-m
 import { Dropdown } from 'react-native-element-dropdown';
 import moment from 'moment';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Autocomplete from 'react-native-autocomplete-input';
 
 
 const SignUp = props => {
@@ -40,13 +41,14 @@ const SignUp = props => {
   const [gander, setgander] = useState('');
   const [address, setaddress] = useState('');
   const [addressError, setaddressError] = useState('');
-  const [state, setstate] = useState(null);
+  const [heightt, setheightt] = useState(0);
+  const [heightt1, setheightt1] = useState(0);
+
   const [isFocus1, setIsFocus1] = useState(false);
   const [district, setdistrict] = useState(null);
   const [isFocus2, setIsFocus2] = useState(false);
-  const [Grey, setGrey] = useState('#000000');
+  const [Grey, setGrey] = useState('grey');
   const [password, setpassword] = useState('');
-  const [passwordError, setpasswordError] = useState('');
   const [isFocus3, setIsFocus3] = useState(false);
   const [blood, setblood] = useState();
   const [age, setage] = useState('');
@@ -54,8 +56,14 @@ const SignUp = props => {
   const [districtsData, setdistrictsData] = useState([]);
 
   const [pickerMode, setPickerMode] = useState(null);
-  const [Dob, setDob] = useState('please Select of Date of Birth');
+  const [Dob, setDob] = useState('Please Select of Date of Birth');
 
+  const [films, setFilms] = useState([]);
+  const [filteredFilms, setFilteredFilms] = useState([]);
+  const [selectedValue, setSelectedValue] = useState({});
+  const [selectedValue1, setSelectedValue1] = useState({});
+  const [city, setcity] = useState([]);
+  const [filteredCity, setfilteredCity] = useState([]);
   const showDatePicker = () => {
     setPickerMode("date");
   };
@@ -81,14 +89,61 @@ const SignUp = props => {
     { label: 'O+', value: '7' },
     { label: 'O-', value: '8' },
   ];
+  const Heiggt = (text) => {
+    if (text == null) {
+      setheightt(0)
+      // {text.split('').map((word) => word && heightt ++).join('')}
+    } else {
+      setheightt(120)
+      if (text == 0) {
+        setheightt(0)
+      }
+    }
+  }
+  const Heiggt1 = (text) => {
+    if (text == null) {
+      setheightt1(0)
+      // {text.split('').map((word) => word && heightt ++).join('')}
+    } else {
+      setheightt1(120)
+      if (text == 0) {
+        setheightt1(0)
+      }
+    }
+  }
 
 
+  const searchText = (text) => {
+    let matches = [];
+    if (text) {
+      matches = films.filter(
+        res => {
+          const regex = new RegExp(`${text.trim()}`, 'i');
+          return res.label.match(regex);
+        });
+      setFilteredFilms(matches);
+    } else {
+      setFilteredFilms([]);
+    }
+  }
+  const citySearch = (text) => {
+    let matches = [];
+    if (text) {
+      matches = city.filter(
+        res => {
+          const regex = new RegExp(`${text.trim()}`, 'i');
+          return res.label.match(regex);
+        });
+      setfilteredCity(matches);
+    } else {
+      setfilteredCity([]);
+    }
+  }
 
   useEffect(() => {
     fetch('https://bloodlinks.in/get_states')
       .then((response) => response.json())
       .then((response) => {
-        // setdataStates(response)
         var states = Object.keys(response).length;
         let statesArray = [];
         for (var i = 0; i < states; i++) {
@@ -97,7 +152,8 @@ const SignUp = props => {
             label: response[i].state_name,
           })
         }
-        setstatesData(statesArray);
+        console.log('api response ', statesArray)
+        setFilms(statesArray);
       })
       .catch((error) => {
         console.error('catch api error', error);
@@ -130,7 +186,8 @@ const SignUp = props => {
             label: Response[i].district_name,
           })
         }
-        setdistrictsData(districtArray);
+        setcity(districtArray);
+        console.log('city api data array push',districtArray)
       })
       .catch((error) => {
         console.error("ERROR FOUND" + error);
@@ -207,11 +264,13 @@ const SignUp = props => {
         setage(Response.age)
         if (Response.status == true) {
           alert("user Signup successfully");
+          profFunct()
           navigation.navigate('OtpSinup', {
             deta: data,
+            num: phone,
           })
         } else {
-          alert("this username is already exists");
+          alert("This number is already exists");
         }
 
       })
@@ -224,8 +283,9 @@ const SignUp = props => {
 
     < View style={styles.container}>
       <StatusTopBar />
-      <View>
-        <ScrollView >
+      <ScrollView style={{ flex: 1, }}>
+
+        <View>
           <ImageBackground
             style={styles.loginbg}
             source={require('../assets/Images/loginBG.png')}>
@@ -244,8 +304,8 @@ const SignUp = props => {
             >
 
 
-              <KeyboardAwareScrollView style={styles.forms}>
-                <View style={[styles.loginTitle, { marginTop: moderateScale(50) }]}>
+              <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'} behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.forms}>
+                <View style={[styles.loginTitle, { marginTop: moderateScale(60) }]}>
                   <Text style={styles.loginTitle}>welcome to bloodlinks</Text>
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', marginBottom: moderateScale(20) }}>
@@ -261,7 +321,6 @@ const SignUp = props => {
                       borderColor={name ? Grey : nameError}
                     />
                   </View>
-
                   <View>
                     <TextInput
                       style={styles.input}
@@ -307,16 +366,11 @@ const SignUp = props => {
                     borderColor={phone ? Grey : phoneError}
                   />
                   <View>
-                    <View style={{
-                      height: height * 0.07,
-                      width: width * 0.8,
-                      borderWidth: scale(1.40),
-                      padding: width * 0.03,
-                      borderRadius: 5,
-                      //  borderColor={Dob ? 'Grey' : DobError},
-                      marginBottom: scale(15)
-                    }} >
-                      <Text style={{ color: 'grey', letterSpacing: 1, fontSize: scale(15), fontWeight: '400', marginBottom: scale(2) }} onPress={showDatePicker}>{Dob}</Text>
+                    <View
+
+                      style={[styles.input, { justifyContent: 'center' }]}
+                    >
+                      <Text style={{ color: 'grey', fontSize: scale(12), fontWeight: '400', }} onPress={showDatePicker}>{Dob}</Text>
                     </View>
                     <DateTimePickerModal
                       isVisible={pickerMode !== null}
@@ -326,7 +380,6 @@ const SignUp = props => {
                       display="default"
                     />
                   </View>
-
                   <View style={styles.profileDeatils}>
                     <RadioButton
                       value="male"
@@ -334,7 +387,7 @@ const SignUp = props => {
                       status={gander === 'male' ? 'checked' : 'unchecked'}
                       onPress={() => setgander('male')}
                     />
-                    <Text style={{ fontSize: 15, }}>MALE</Text>
+                    <Text style={{ fontSize: scale(13), color: 'grey' }}>MALE</Text>
 
                     <RadioButton
                       value="female"
@@ -342,9 +395,8 @@ const SignUp = props => {
                       status={gander === 'female' ? 'checked' : 'unchecked'}
                       onPress={() => setgander('female')}
                     />
-                    <Text style={{ fontSize: 15, }}>FEMALE</Text>
+                    <Text style={{ fontSize: scale(13), color: 'grey' }}>FEMALE</Text>
                   </View>
-
                   <TextInput
                     style={styles.input}
                     placeholder="Address"
@@ -354,7 +406,7 @@ const SignUp = props => {
                     borderColor={address ? Grey : addressError}
                   />
 
-                  <View style={{ flex: 1, width: '100%', justifyContent: 'center', marginLeft: scale(20) }}>
+                  <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: scale(30) }}>
                     <Dropdown
                       style={[styles.input, isFocus3 && { borderColor: '#85060F' }]}
                       placeholderStyle={styles.placeholderStyle}
@@ -365,7 +417,7 @@ const SignUp = props => {
                       activeColor='#FDDDE0'
                       dropdownPosition='bottom'
                       data={data}
-                      search
+                      // search
                       maxHeight={250}
                       labelField="label"
                       valueField="value"
@@ -380,32 +432,49 @@ const SignUp = props => {
                       }}
 
                     />
-                    <Dropdown
-                      style={[styles.input, isFocus1 && { borderColor: '#85060F' }]}
-                      placeholderStyle={styles.placeholderStyle}
-                      selectedTextStyle={styles.selectedTextStyle}
-                      inputSearchStyle={styles.inputSearchStyle}
-                      itemContainerStyle={{ borderColor: 'gray', borderWidth: 1.5, }}
-                      containerStyle={{ borderColor: 'gray', borderWidth: 1, }}
-                      activeColor='#FDDDE0'
-                      dropdownPosition='bottom'
-                      data={statesData}
-                      search
-                      maxHeight={250}
-                      labelField="label"
-                      valueField="value"
-                      placeholder={'Select States'}
-                      searchPlaceholder="Search..."
-                      value={state}
-                      onFocus={() => setIsFocus1(true)}
-                      onBlur={() => setIsFocus1(false)}
-                      onChange={item => {
-                        setstate(item.value);
-                        handleDistrict(item.value)
-                        setIsFocus1(false);
-                      }} />
-                    <Dropdown
-                      style={[styles.input, isFocus2 && { borderColor: '#85060F' }]}
+                    <Autocomplete
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      inputContainerStyle={[styles.input, { justifyContent: 'center', borderColor: 'black', }]}
+                      listContainerStyle={{
+                        zIndex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'flex-end', position: 'absolute', width: '80%', top: 57, transform: [{ scale: 1 }],
+                        backgroundColor: '#E5E4E2', height: scale(heightt), paddingLeft: scale(10),
+                      }}
+                      onChangeText={(text) => {
+                        searchText(text);
+                        Heiggt(text)
+                      }}
+                      placeholder="Please Select States"
+                      placeholderTextColor="grey"
+
+                      data={filteredFilms}
+                      defaultValue={
+                        JSON.stringify(selectedValue) === '{}' ?
+                          '' :
+                          selectedValue.label
+                      }
+                      flatListProps={{
+                        renderItem: ({ item }) =>
+
+                          <TouchableOpacity style={{ height: scale(25), width: scale(300), }}
+                            onPress={() => {
+                              setSelectedValue(item);
+                              setheightt(null)
+                              setFilteredFilms([]);
+                              handleDistrict(item.value)
+                            }}>
+                            <Text style={{ textTransform: 'uppercase', fontSize: scale(12), fontFamily: 'bold' }}>
+                              {item.label}
+                            </Text>
+                          </TouchableOpacity>
+                      }}
+
+                    />
+
+                    {/* <Dropdown
+                      style={[styles.input, isFocus2 && { borderColor: '#85060F', }]}
                       placeholderStyle={styles.placeholderStyle}
                       selectedTextStyle={styles.selectedTextStyle}
                       inputSearchStyle={styles.inputSearchStyle}
@@ -415,7 +484,7 @@ const SignUp = props => {
                       dropdownPosition='bottom'
                       data={districtsData}
                       search
-                      maxHeight={250}
+                      maxHeight={160}
                       labelField="label"
                       valueField="value"
                       placeholder={'Select City'}
@@ -427,12 +496,47 @@ const SignUp = props => {
                         setdistrict(item.value);
                         setIsFocus2(false);
                       }}
+                    /> */}
+                    <Autocomplete
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      inputContainerStyle={[styles.input, { justifyContent: 'center', borderColor: 'black', }]}
+                      listContainerStyle={{
+                        zIndex: 2,
+                        alignItems: 'center',
+                        justifyContent: 'flex-end', position: 'absolute', width: '80%', top: 57, transform: [{ scale: 1 }],
+                        backgroundColor: '#E5E4E2', height: scale(heightt1), paddingLeft: scale(10),textTransform: 'uppercase',
+                      }}
+                      onChangeText={(text) => {
+                        citySearch(text);
+                        Heiggt1(text)
+                      }}
+                      placeholder="Please Select City"
+                      placeholderTextColor="grey"
+                      data={filteredCity}
+                      defaultValue={
+                        JSON.stringify(selectedValue1) === '{}' ?
+                          '' :
+                          selectedValue1.label
+                      }
+                      flatListProps={{
+                        renderItem: ({ item }) =>
+
+                          <TouchableOpacity style={{ height: scale(25), width: scale(300), }}
+                            onPress={() => {
+                              setSelectedValue1(item);
+                              setheightt1(null)
+                              setfilteredCity([]);
+                            }}>
+                            <Text style={{ textTransform: 'uppercase', fontSize: scale(12), fontFamily: 'bold' }}>
+                              {/* {item.label} */}
+                              {item.label.toUpperCase()}
+                            </Text>
+                          </TouchableOpacity>
+                      }}
 
                     />
-
                   </View>
-
-
 
                   <TouchableOpacity onPress={() => Submit()}>
                     <View style={styles.butttons}>
@@ -440,9 +544,9 @@ const SignUp = props => {
                     </View>
                   </TouchableOpacity>
 
-                  <View style={{ flexDirection: 'row',  height: moderateScale(50), alignItems: 'center', justifyContent: 'center', }}>
+                  <View style={{ flexDirection: 'row', height: moderateScale(50), alignItems: 'center', justifyContent: 'center', }}>
                     <Text
-                      style={{ fontSize: scale(14), fontWeight: '400', color: 'grey',width: '60%', }}>
+                      style={{ fontSize: scale(14), fontWeight: '400', color: 'grey', width: '47%', }}>
                       Allready have an account
                     </Text>
                     <TouchableOpacity
@@ -451,7 +555,7 @@ const SignUp = props => {
                         style={{
                           textDecorationLine: 'underline',
                           fontSize: scale(13),
-                          width:scale(40), 
+                          width: scale(40),
                           fontWeight: '600',
                           marginLeft: 5,
                           color: 'black',
@@ -465,8 +569,9 @@ const SignUp = props => {
               </KeyboardAwareScrollView>
             </ImageBackground>
           </ImageBackground>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
+
     </View>
   );
 };
@@ -478,7 +583,7 @@ const styles = StyleSheet.create({
   loginbg: {
     justifyContent: 'center',
     marginBottom: moderateScale(10),
-   },
+  },
   loginTopimg: {
     justifyContent: 'center',
     height: moderateScale(170),
@@ -519,11 +624,8 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(15),
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#eae8e8',
     width: '90%',
     height: moderateScale(50),
-    elevation: 6,
-    color: "black",
     flexDirection: 'row',
   },
 
@@ -560,41 +662,39 @@ const styles = StyleSheet.create({
     justifyContent: 'center', alignItems: 'center',
   },
   forms: {
+    // marginBottom: moderateScale(250),
     position: 'absolute',
+    // backgroundColor:'pink',
     flex: 1,
     // height: height*5
 
   },
   loginTitle: {
     width: '100%',
-    marginBottom: moderateScale(5),
+    marginBottom: moderateScale(8),
     textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    fontSize: scale(22),
-    letterSpacing: 1,
+    fontSize: scale(20),
     height: moderateScale(30),
-    flexDirection: 'column',
+    flexDirection: 'row',
     color: 'black',
   },
   input: {
     height: height * 0.07,
     width: width * 0.8,
     borderWidth: scale(1.40),
+    // borderColor: 'grey',
     padding: width * 0.03,
     borderRadius: 5,
-    letterSpacing: 1,
-    fontSize: scale(16.5),
-    fontWeight: '400',
+    fontSize: scale(12), fontWeight: '400',
     color: 'black',
-    marginBottom: scale(15)
+    marginBottom: scale(15),
   },
   loginbtn: {
     color: COLOR.WHITE,
     backgroundColor: '#85060F',
-    paddingVertical: height * 0.012,
+    paddingVertical: height * 0.015,
     width: width * 0.75,
     textAlign: 'center',
     borderRadius: 10,

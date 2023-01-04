@@ -15,6 +15,7 @@ import { moderateScale, scale } from 'react-native-size-matters';
 import DrawerHeader from '../Components/DrawerHeader';
 const { width, height } = Dimensions.get('window');
 const Notificationscreen = ({ route }) => {
+  console.log('value pass param', route.params.paramKey)
   return (
     <ScrollView style={styles.container}>
       <DrawerHeader name={'Notification'} />
@@ -27,9 +28,8 @@ const Notificationscreen = ({ route }) => {
         flexDirection: 'row',
       }}>
         <View
-          style={styles.headerBtn}
-          >
-          <Text style={{ color: 'black', fontSize: scale(15.8), fontWeight: '500', letterSpacing: 1, }}>Welcome to BloodLink {route.params.paramKey}</Text>
+          style={styles.headerBtn}>
+          <Text style={{ color: 'black', fontSize: scale(14), fontWeight: '500', width: scale(300), }}>Welcome to BloodLink {route.params.paramKey} </Text>
         </View>
       </View>
     </ScrollView>

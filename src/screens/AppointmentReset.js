@@ -167,7 +167,6 @@ const AppointmentReset = () => {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 width: moderateScale(350),
-                height: moderateScale(230),
                 shadowColor: 'grey',
                 borderWidth: scale(2),
                 borderColor: '#93121B',
@@ -185,8 +184,7 @@ const AppointmentReset = () => {
                     justifyContent: 'center',
                     flexDirection: 'row',
                     width: '95%',
-                    height: moderateScale(200),
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',margin:scale(10),paddingVertical:scale(5)
                 }}>
                 <View style={{
                     alignItems: 'center',
@@ -413,12 +411,12 @@ const AppointmentReset = () => {
                     </View>
                     <View style={{ alignItems: 'center', flexDirection: 'column', justifyContent: 'center', height: moderateScale(50), width: '100%', marginTop: moderateScale(5), }}>
                         <View style={{ height: moderateScale(50), width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                            <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(10), marginRight: moderateScale(5), }}>
+                            <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', borderRadius: moderateScale(2), marginRight: moderateScale(5), }}>
                                 <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                                     Reset
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => Filter()} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(10), marginLeft: moderateScale(5), }}>
+                            <TouchableOpacity onPress={() => Filter()} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black', borderRadius: moderateScale(2), marginLeft: moderateScale(5), }}>
                                 <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                                     Filter
                                 </Text>

@@ -153,8 +153,6 @@ const Appointment = () => {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 width: moderateScale(350),
-                height: moderateScale(230),
-                backgroundColor: 'white',
                 shadowColor: 'grey',
                 borderWidth: scale(2),
                 borderColor: '#93121B',
@@ -172,8 +170,8 @@ const Appointment = () => {
                     justifyContent: 'center',
                     flexDirection: 'row',
                     width: '95%',
-                    height: moderateScale(200),
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',
+                    margin:scale(10),paddingVertical:scale(5)
                 }}>
                 <View style={{
                     alignItems: 'center',
@@ -201,13 +199,13 @@ const Appointment = () => {
                         flexDirection: 'row',
                         height: moderateScale(35),
                     }}>
-                        <Text style={{  fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Organization Address :-</Text>
+                        <Text style={{ fontSize: scale(16), textAlign: 'left', color: '#93121B', fontWeight: '300', width: scale(210) }}>Organization Address :-</Text>
                     </View>
                     <View style={{
-                       alignItems: 'flex-start',
-                       justifyContent: 'center',
-                       flexDirection: 'column',
-                       width: '100%',
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        width: '100%',
                     }}>
                         <Text style={{ fontSize: scale(15), paddingLeft: scale(15), width: '100%', }}>{item.address_1}</Text>
                     </View>
@@ -400,12 +398,12 @@ const Appointment = () => {
                     </View>
                     <View style={{ alignItems: 'center', flexDirection: 'column', justifyContent: 'center', height: moderateScale(50), width: '100%', marginTop: moderateScale(5), }}>
                         <View style={{ height: moderateScale(50), width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
-                            <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(10), marginRight: moderateScale(5), }}>
+                            <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', borderRadius: moderateScale(2), marginRight: moderateScale(5), }}>
                                 <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                                     Reset
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('AppointmentReset')} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(10), marginLeft: moderateScale(5), }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('AppointmentReset')} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black', borderRadius: moderateScale(2), marginLeft: moderateScale(5), }}>
                                 <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                                     Filter
                                 </Text>
@@ -413,7 +411,7 @@ const Appointment = () => {
                         </View>
 
                     </View>
-                    <View style={{ flex: 1,  width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(10),marginHorizontal:scale(15) }}>
+                    <View style={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(10), marginHorizontal: scale(15) }}>
                         {isLoading ? (<ActivityIndicator />) : (
                             <FlatList
                                 data={Data}

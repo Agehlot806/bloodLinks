@@ -30,7 +30,7 @@ const Login = () => {
   const [Grey, setGrey] = useState('#000000');
   const [phoneError, setphoneError] = useState('');
   const [ajaxRequesting, setAjaxRequesting] = useState(false);
-   
+
   const [visible, setVisible] = React.useState(false);
   const onDismissSnackBar = () => setVisible(false);
   const loginPage = () => {
@@ -127,19 +127,16 @@ const Login = () => {
                     color: 'black',
                     textTransform: 'uppercase',
                     fontWeight: 'bold',
-                    fontSize: scale(16),
-                    letterSpacing: 1,
+                    fontSize: scale(15),
                     textAlign: "center"
                   }}>We will send your OTP on your</Text>
                   <Text style={{
                     color: 'black',
-                    // textTransform: 'uppercase',
                     fontWeight: 'bold',
-                    fontSize: scale(15),
-                    letterSpacing: 1,
+                    textTransform: 'uppercase',
+                    fontSize: scale(13.5),
                     textAlign: "center",
-                    // top: scale(8)
-                  }}>Moblie Number</Text>
+                  }}>Phone Number</Text>
                 </Animatable.View>
                 <Animatable.View animation="slideInDown">
                   <TextInput
@@ -248,7 +245,7 @@ const styles = StyleSheet.create({
     padding: width * 0.03,
     borderRadius: 5,
     letterSpacing: 1,
-    fontSize: scale(16.5),
+    fontSize: scale(14),
     fontWeight: '400',
     color: 'black',
     marginTop: scale(10),

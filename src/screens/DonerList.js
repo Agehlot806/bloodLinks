@@ -195,7 +195,7 @@ const DonerList = props => {
             flexDirection: 'row',
             height: moderateScale(35),
            }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: 'black', fontWeight: '400', width: '100%', }}>Organization Name :-</Text>
+            <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Organization Name :-</Text>
           </View>
           <View style={{
             alignItems: 'center',
@@ -203,7 +203,7 @@ const DonerList = props => {
             flexDirection: 'row',
             width: '100%',
           }}>
-            <Text style={{ fontSize: scale(15), paddingLeft: 3, }}>{item.name}</Text>
+            <Text style={{ fontSize: scale(13), paddingLeft: 3,color: 'grey', fontWeight: '500',width: '100%', }}>{item.name}</Text>
           </View>
           <View style={{
             alignItems: 'center',
@@ -211,7 +211,7 @@ const DonerList = props => {
             flexDirection: 'row',
             height: moderateScale(35),
            }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: 'black', fontWeight: '400', width: '100%', }}>Requested Date :-</Text>
+            <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Requested Date :-</Text>
           </View>
 
           <View style={{
@@ -220,7 +220,7 @@ const DonerList = props => {
             flexDirection: 'column',
             width: '100%',
           }}>
-            <Text style={{ fontSize: scale(15), paddingLeft: 3, }}>{item.requested_schedule_date}</Text>
+            <Text style={{fontSize: scale(13), paddingLeft: 3,color: 'grey', fontWeight: '500',width: '100%', }}>{item.requested_schedule_date}</Text>
           </View>
           <View style={{
             alignItems: 'center',
@@ -228,7 +228,7 @@ const DonerList = props => {
             flexDirection: 'row',
             height: moderateScale(35),
            }}>
-            <Text style={{ fontSize: scale(16), textAlign: 'left', color: 'black', fontWeight: '400', width: '100%', }}>Request Id :-</Text>
+            <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Request Id :-</Text>
           </View>
 
           <View style={{
@@ -237,7 +237,7 @@ const DonerList = props => {
             flexDirection: 'column',
             width: '100%',
           }}>
-            <Text style={{ fontSize: scale(15), paddingLeft: 3, }}>{item.id}</Text>
+            <Text style={{ fontSize: scale(13), paddingLeft: 3,color: 'grey', fontWeight: '500',width: '100%',}}>{item.id}</Text>
           </View>
 
         </View>

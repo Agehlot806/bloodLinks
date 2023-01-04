@@ -22,6 +22,7 @@ const OtpSinup = ({ route }) => {
     const inputRefOne = useRef();
 
     const LoginUserId = async (city) => {
+        console.log('hello user id sinup', city)
         try {
             await AsyncStorage.setItem('User', city)
         } catch (e) {
@@ -40,13 +41,12 @@ const OtpSinup = ({ route }) => {
             cust_otp: pin1,
             // data: route.params.deta,
         }
-        console.log('custom Response Api', data)
+        console.log('custom Response Api singup deta', data)
         fetch(url, {
             method: 'POST',
             credentials: 'same-origin',
             mode: 'same-origin',
             body: JSON.stringify({
-                // cust_mobile: route.params.Number,
                 cust_otp: pin1,
                 user: route.params.deta
             }),
@@ -64,6 +64,7 @@ const OtpSinup = ({ route }) => {
                     navigation.navigate('Home', {
                         user: Response.user_id
                     })
+                    LoginUserId(city)
                 }
                 else {
                     alert("User Not Sinup !");
@@ -75,7 +76,7 @@ const OtpSinup = ({ route }) => {
             })
     }
     const Resend = () => {
-        let url = `https://bloodlinks.in/login`   //API to render signup
+        let url = `https://bloodlinks.in/login`   //API to render login
         var headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ const OtpSinup = ({ route }) => {
             credentials: 'same-origin',
             mode: 'same-origin',
             body: JSON.stringify({
-                cust_mobile: route.params.Number,
+                cust_mobile: route.params.num,
             }),
             headers: headers,
         })

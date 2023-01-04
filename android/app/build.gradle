@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
- 
+
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -142,7 +142,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
-        multiDexEnabled true       
+        multiDexEnabled true
         if (isNewArchitectureEnabled()) {
             // We configure the CMake build only if you decide to opt-in for the New Architecture.
             externalNativeBuild {
@@ -219,21 +219,34 @@ android {
         }
     }
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
+        // debug {
+        //     storeFile file('debug.keystore')
+        //     storePassword 'android'
+        //     keyAlias 'androiddebugkey'
+        //     keyPassword 'android'
+        // }
+        release {
+            //if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file('my_upload_key.keystore')
+                storePassword 'techpanda'
+                keyAlias 'your_key_alias'
+                keyPassword 'techpanda'
+            }
+        //}
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            // if (reactNativeArchitectures){
+            //     ndk{
+            //         abiFilters NativeArchitectures.split(',')
+            //     }
+            // }
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

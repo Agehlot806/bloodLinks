@@ -1,5 +1,5 @@
 {
-  "name": "BloodLinks",
+  "name": "Blood_Links",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -29,6 +29,7 @@
     "react-native": "^0.70.1",
     "react-native-animatable": "^1.3.3",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-autocomplete-input": "^5.2.0",
     "react-native-cli": "^2.0.1",
     "react-native-dropdown-picker": "^5.4.2",
     "react-native-element-dropdown": "^2.3.0",

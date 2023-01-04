@@ -193,7 +193,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "80%"
                         }}
@@ -215,7 +215,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "80%"
                         }}
@@ -237,7 +237,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "80%"
                         }}
@@ -259,7 +259,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "80%"
                         }}
@@ -281,7 +281,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "80%"
                         }}
@@ -306,7 +306,7 @@ const ProfileEdit = props => {
                         status={Gender === 'male' ? 'checked' : 'unchecked'}
                         onPress={() => setGender('male')}
                     />
-                    <Text style={{ fontSize: 15, }}>MALE</Text>
+                    <Text style={{ fontSize: scale(13), }}>MALE</Text>
 
                     <RadioButton
                         value="female"
@@ -314,7 +314,7 @@ const ProfileEdit = props => {
                         status={Gender === 'female' ? 'checked' : 'unchecked'}
                         onPress={() => setGender('female')}
                     />
-                    <Text style={{ fontSize: 15, }}>FEMALE</Text>
+                    <Text style={{ fontSize: scale(13), }}>FEMALE</Text>
 
                 </View>
                 <View style={styles.profileDeatils}>
@@ -329,7 +329,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "80%"
                         }}
@@ -351,7 +351,7 @@ const ProfileEdit = props => {
                         style={{
                             height: scale(45),
                             borderColor: "black",
-                            fontSize: scale(15.5),
+                            fontSize: scale(14),
                             color: "black",
                             width: "70%"
                         }}
@@ -371,15 +371,16 @@ const ProfileEdit = props => {
                     backgroundColor: '#85060F',
                     width: '70%',
                     marginLeft: scale(50),
-                    height: moderateScale(60),
+                    height: moderateScale(50),
                     elevation: 6,
                     flexDirection: 'row',
                     borderRadius: moderateScale(15)
                 }}>
                     <View style={{
-                        width: '25%',
+                        width: '30%',height:scale(29),
                         alignItems: 'flex-end',
                         justifyContent: 'center',
+                        // backgroundColor:'white',
                     }}>
                         <Image
                             style={[styles.icon, { tintColor: 'white' }]}
@@ -388,7 +389,7 @@ const ProfileEdit = props => {
 
                     </View>
                     <Text style={{
-                        fontSize:scale(17.5),
+                        fontSize:scale(15),
                         color: 'white',
                         paddingLeft: scale(15),
                         textAlign: 'center'
@@ -463,8 +464,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     icon: {
-        height: height * 0.04,
-        width: width * 0.08,
+        height:scale(25),
+        width:scale(25),
         marginRight: width * 0.05,
         tintColor: '#b31d27'
     },

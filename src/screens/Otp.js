@@ -20,12 +20,8 @@ const Otp = ({ route }) => {
   const navigation = useNavigation();
   const [pin1, setpin1] = useState();
   const [pin2, setpin2] = useState();
-  const [pin3, setpin3] = useState();
-  const [pin4, setpin4] = useState();
+  
   const inputRefOne = useRef();
-  const inputRefTwo = useRef();
-  const inputRefThree = useRef();
-  const inputRefFour = useRef();
   const LoginUserId = async (city) => {
     try {
       await AsyncStorage.setItem('User', city)
@@ -43,8 +39,7 @@ const Otp = ({ route }) => {
     let data = {
       cust_mobile: pin2,
       cust_otp: pin1,
-      // verificationsignup: route.params.deta,
-    }
+     }
     console.log('custom Response Api', data)
     fetch(url, {
       method: 'POST',
@@ -53,21 +48,19 @@ const Otp = ({ route }) => {
       body: JSON.stringify({
         cust_mobile: route.params.Number,
         cust_otp: pin1,
-        
+
       }),
       headers: headers,
     })
       // deta
       .then((Response) => Response.json())
       .then((Response) => {
-        console.log('RESPONSE apiiii otp verfiy ---------OTP----->>>>', Response )
+        console.log('RESPONSE apiiii otp verfiy ---------OTP----->>>>', Response)
         var city = (Response.data[0].user_id);
         LoginUserId(city)
         if (Response.status == true) {
           alert("User Login successfully !");
-          navigation.navigate('Home',{
-            user:Response.user_id
-          })
+          navigation.navigate('Home')
         }
         else {
           alert("User Not Login !");

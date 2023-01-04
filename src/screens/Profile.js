@@ -89,7 +89,7 @@ const Profile = props => {
       <StatusTopBar />
       <DrawerHeader name={'My Profile'} image1={true} />
       <View style={styles.profile}>
-        <View style={{ height: moderateScale(165), width: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',}}>
+        <View style={{ height: moderateScale(155), width: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',}}>
           <View style={{ height: moderateScale(150), width: '50%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EF486A', borderRadius: 100, flexDirection: 'row' }}>
             <Image
               style={{ height: height * 0.19, width: '95%', borderRadius: 100 }}
@@ -233,9 +233,11 @@ const styles = StyleSheet.create({
   },
 
   profileDeatilsTitle: {
-    fontSize: width * 0.05,
+    fontSize: scale(14),
     color: 'black',
     paddingRight: width * 0.13,
+    width:'71%',
+    fontWeight:'500', 
   },
   profileDeatil: {
     fontSize: width * 0.05,

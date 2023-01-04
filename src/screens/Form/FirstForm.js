@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { TouchableOpacity, View, Text, Modal, Dimensions, ScrollView } from 'react-native';
+import { TouchableOpacity, View, Text, Modal, StyleSheet, ScrollView } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { moderateScale, scale } from 'react-native-size-matters';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { MultiSelect } from 'react-native-element-dropdown';
 import color from '../../styles/color';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -25,26 +25,18 @@ const FirstForm1 = ({ }) => {
     // const [checked1, setChecked1] = React.useState(false);
     const [shouldShow, setShouldShow] = useState();
     const [OtherDay, setOtherDay] = useState(true);
+    const [isFocus3, setIsFocus3] = useState(false);
+
     // PICKER STATE  
     const [value1, setValue1] = useState([]);
-    const [open1, setopen1] = useState(false);
     const [items1, setItems1] = React.useState([
         { label: 'COMMON COLD', value: '66' },
         { label: 'FEVER', value: '67' },
         { label: 'SINUSITIS', value: '68' },
     ]);
-    const Close1 = useCallback(() => {
-        setopen2(false)
-        setopen3(false)
-        setopen4(false)
-        setopen5(false)
-        setopen6(false)
-        setopen7(false)
-        setopen8(false)
-    }, []);
+
 
     const [value2, setValue2] = useState([]);
-    const [open2, setopen2] = useState(false);
     const [items2, setItems2] = React.useState([
         { label: 'ANTIBIOTIC', value: '1' },
         { label: 'ALCOHOL', value: '2' },
@@ -53,67 +45,30 @@ const FirstForm1 = ({ }) => {
         { label: 'ANY OTHER', value: '5' },
 
     ]);
-    const Close2 = useCallback(() => {
-        setopen1(false)
-        setopen3(false)
-        setopen4(false)
-        setopen5(false)
-        setopen6(false)
-        setopen7(false)
-        setopen8(false)
-    }, []);
+
 
     const [value3, setValue3] = useState([]);
-    const [open3, setopen3] = useState(false);
     const [items3, setItems3] = React.useState([
         { label: 'TYPHOID', value: '1' },
         { label: 'CHOLERA', value: '2' },
         { label: 'TETANUS', value: '3' },
     ]);
-    const Close3 = useCallback(() => {
-        setopen1(false)
-        setopen2(false)
-        setopen4(false)
-        setopen5(false)
-        setopen6(false)
-        setopen7(false)
-        setopen8(false)
-    }, []);
 
     const [value4, setValue4] = useState([]);
-    const [open4, setopen4] = useState(false);
     const [items4, setItems4] = React.useState([
         { label: 'TYPHOID', value: '41' },
         { label: 'CHOLERA', value: '42' },
         { label: 'TETANUS', value: '43' },
     ]);
-    const Close4 = useCallback(() => {
-        setopen1(false)
-        setopen2(false)
-        setopen3(false)
-        setopen5(false)
-        setopen6(false)
-        setopen7(false)
-        setopen8(false)
-    }, []);
+
     const [value5, setValue5] = useState([]);
-    const [open5, setopen5] = useState(false);
     const [items5, setItems5] = React.useState([
         { label: 'MALARIA', value: '46' },
         { label: 'DENTAL EXTRACTION', value: '47' },
         { label: 'MINOR SURGERY', value: '48' },
     ]);
-    const Close5 = useCallback(() => {
-        setopen1(false)
-        setopen2(false)
-        setopen3(false)
-        setopen4(false)
-        setopen6(false)
-        setopen7(false)
-        setopen8(false)
-    }, []);
+
     const [value6, setValue6] = useState([]);
-    const [open6, setopen6] = useState(false);
     const [items6, setItems6] = React.useState([
         { label: 'ANEMIA', value: '37' },
         { label: 'DENGUE', value: '38' },
@@ -121,18 +76,9 @@ const FirstForm1 = ({ }) => {
         { label: 'TATTOOING', value: '40' },
 
     ]);
-    const Close6 = useCallback(() => {
-        setopen1(false)
-        setopen2(false)
-        setopen3(false)
-        setopen4(false)
-        setopen5(false)
-        setopen7(false)
-        setopen8(false)
-    }, []);
+
 
     const [value7, setValue7] = useState([]);
-    const [open7, setopen7] = useState(false);
     const [items7, setItems7] = React.useState([
         { label: 'JAUNDICE', value: '55' },
         { label: 'TYPHOID', value: '56' },
@@ -140,18 +86,9 @@ const FirstForm1 = ({ }) => {
         { label: 'BODY PIERCING', value: '58' },
 
     ]);
-    const Close7 = useCallback(() => {
-        setopen1(false)
-        setopen2(false)
-        setopen3(false)
-        setopen4(false)
-        setopen5(false)
-        setopen6(false)
-        setopen8(false)
-    }, []);
+
 
     const [value8, setValue8] = useState([]);
-    const [open8, setopen8] = useState(false);
     const [items8, setItems8] = React.useState([
         { label: 'HEART DISEASE', value: 'HEART DISEASE' },
         { label: 'LEPROSY', value: 'LEPROSY' },
@@ -160,15 +97,7 @@ const FirstForm1 = ({ }) => {
         { label: 'KALA-AZAR', value: 'KALA-AZAR' },
         { label: 'STOMACH UNFCER', value: 'STOMACH UNFCER' },
     ]);
-    const Close8 = useCallback(() => {
-        setopen1(false)
-        setopen2(false)
-        setopen3(false)
-        setopen4(false)
-        setopen5(false)
-        setopen6(false)
-        setopen7(false)
-    }, []);
+
     useEffect(() => {
         Test()
         Test2('yes')
@@ -534,8 +463,8 @@ const FirstForm1 = ({ }) => {
                                         </View>
                                     </>
                                 ) : (null)}
-                                <View style={{ height: moderateScale(130), width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                    <View style={{ height: moderateScale(65), width: '100%', flexDirection: 'column', justifyContent: 'flex-start' }}>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20) }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
                                         <Text style={{ fontSize: scale(15), color: 'black' }}>1. Are You Suffering From :</Text>
                                         <View style={{ height: moderateScale(40), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 30 }}>
                                             <RadioButton
@@ -555,344 +484,373 @@ const FirstForm1 = ({ }) => {
                                         </View>
                                     </View>
                                     {dropdounHide1 ? (
-                                        <View style={{ zIndex: 1, flexDirection: "row", width: "100%", }}>
-
-                                            <View style={{ zIndex: 1, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open1}
-                                                    onOpen={Close1}
-                                                    value={value1}
-                                                    items={items1}
-                                                    setOpen={setopen1}
-                                                    setValue={setValue1}
-                                                    setItems={setItems1}
-                                                    placeholder="Select an item"
-                                                    multiple={true}
-                                                    zIndex={3000}
-                                                    zIndexInverse={1000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(5) }}
-
-
-                                                />
-                                            </View>
+                                        <View style={{ flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items1}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value1}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi', item)
+                                                    setValue1(item);
+                                                }}
+                                            />
                                         </View>
                                     ) : null}
 
 
                                 </View>
-                                <View style={{ height: moderateScale(150), width: '95%', flexDirection: 'column', }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>2.  Have You Taking Or Have Taken Medicine In Last 72 Hours Any Of The Following:</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked2 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test2('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>2.  Have You Taking Or Have Taken Medicine In Last 72 Hours Any Of The Following:</Text>
+                                        <View style={{ height: moderateScale(40), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 30 }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked2 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test2('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked2 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test2('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
-
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked2 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test2('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
+                                        </View>
                                     </View>
                                     {dropdounHide2 ? (
-                                        <View style={{ zIndex: 5, flexDirection: "row", width: "100%", }}>
+                                        <View style={{ flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                data={items2}
+                                                dropdownPosition="BOTTOM"
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value2}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 2', item)
+                                                    setValue2(item);
+                                                }}
 
-                                            <View style={{ zIndex: 2, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open2}
-                                                    onOpen={Close2}
-                                                    value={value2}
-                                                    items={items2}
-                                                    setOpen={setopen2}
-                                                    setValue={setValue2}
-                                                    setItems={setItems2}
-                                                    placeholder="Select an item"
-                                                    multiple={true}
-                                                    zIndex={2000}
-                                                    zIndexInverse={2000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(5), backgroundColor: 'white' }}
-                                                />
-                                            </View>
+                                            />
                                         </View>
                                     ) : null}
 
                                 </View>
-                                <View style={{ height: moderateScale(160), width: '95%', flexDirection: 'column', marginBottom: moderateScale(15) }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>3. In The Last 2 Weeks Have You Been Vaccinated/Immunized For Any Of The Following</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked3 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test3('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>3. In The Last 2 Weeks Have You Been Vaccinated/Immunized For Any Of The Following</Text>
+                                        <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked3 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test3('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked3 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test3('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked3 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test3('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
 
+                                        </View>
                                     </View>
                                     {dropdounHide3 ? (
-                                        <View style={{ zIndex: 3, flexDirection: "row", width: "100%", }}>
+                                        <View style={{ zIndex: 3, flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items3}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value3}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 3', item)
+                                                    setValue3(item);
+                                                }}
 
-                                            <View style={{ zIndex: 3, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open3}
-                                                    value={value3}
-                                                    items={items3}
-                                                    setOpen={setopen3}
-                                                    setValue={setValue3}
-                                                    setItems={setItems3}
-                                                    multiple={true}
-                                                    onOpen={Close3}
-                                                    zIndex={2000}
-                                                    zIndexInverse={3000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(8) }}
-
-                                                />
-                                            </View>
+                                            />
                                         </View>
                                     ) : null}
 
                                 </View>
-                                <View style={{ height: moderateScale(160), width: '95%', flexDirection: 'column', marginBottom: moderateScale(15) }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>4. In The Last 2 Weeks Did You Suffer From Any Of The Following Diseases</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked4 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test4('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>4. In The Last 2 Weeks Did You Suffer From Any Of The Following Diseases</Text>
+                                        <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked4 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test4('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked4 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test4('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked4 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test4('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
 
+                                        </View>
                                     </View>
 
                                     {dropdounHide4 ? (
-                                        <View style={{ zIndex: 4, flexDirection: "row", width: "100%", }}>
+                                        <View style={{ zIndex: 4, flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items4}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value4}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 3', item)
+                                                    setValue4(item);
+                                                }}
 
-                                            <View style={{ zIndex: 4, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open4}
-                                                    value={value4}
-                                                    items={items4}
-                                                    multiple={true}
-                                                    setOpen={setopen4}
-                                                    setValue={setValue4}
-                                                    setItems={setItems4}
-                                                    onOpen={Close4}
-                                                    zIndex={4000}
-                                                    zIndexInverse={4000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(1) }}
-
-                                                />
-                                            </View>
+                                            />
                                         </View>
                                     ) : null}
 
 
                                 </View>
-                                <View style={{ height: moderateScale(160), width: '95%', flexDirection: 'column', marginBottom: moderateScale(15) }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>5. In The Last 3 Months Have You Had Any Of The Following :</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked5 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test5('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', FpaddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>5. In The Last 3 Months Have You Had Any Of The Following :</Text>
+                                        <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked5 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test5('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked5 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test5('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked5 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test5('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
 
+                                        </View>
                                     </View>
 
                                     {dropdounHide5 ? (
-                                        <View style={{ zIndex: 5, flexDirection: "row", width: "100%", }}>
+                                        <View style={{ zIndex: 5, flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items5}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value5}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 3', item)
+                                                    setValue5(item);
+                                                }}
 
-                                            <View style={{ zIndex: 5, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open5}
-                                                    value={value5}
-                                                    items={items5}
-                                                    multiple={true}
-                                                    setOpen={setopen5}
-                                                    setValue={setValue5}
-                                                    setItems={setItems5}
-                                                    onOpen={Close5}
-                                                    zIndex={1000}
-                                                    zIndexInverse={1000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(1) }}
-
-                                                />
-                                            </View>
+                                            />
                                         </View>
                                     ) : null}
 
                                 </View>
-                                <View style={{ height: moderateScale(160), width: '95%', flexDirection: 'column', marginBottom: moderateScale(15) }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>6. In The Last 6 Months Have You Had Any Of The Following :</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked6 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test6('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>6. In The Last 6 Months Have You Had Any Of The Following :</Text>
+                                        <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked6 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test6('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked6 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test6('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked6 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test6('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
 
+                                        </View>
                                     </View>
 
                                     {dropdounHide6 ? (
-                                        <View style={{ zIndex: 8, flexDirection: "row", width: "100%", }}>
-
-                                            <View style={{ zIndex: 7, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open6}
-                                                    value={value6}
-                                                    items={items6}
-                                                    multiple={true}
-                                                    setOpen={setopen6}
-                                                    setValue={setValue6}
-                                                    setItems={setItems6}
-                                                    onOpen={Close6}
-                                                    zIndex={6000}
-                                                    zIndexInverse={6000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(1) }}
-
-                                                />
-                                            </View>
+                                        <View style={{ zIndex: 5, flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items6}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value6}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 3', item)
+                                                    setValue6(item);
+                                                }}
+                                            />
                                         </View>
                                     ) : null}
 
                                 </View>
-                                <View style={{ height: moderateScale(160), width: '95%', flexDirection: 'column', marginBottom: moderateScale(15) }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>7. In The Last 12 Months Have You Had Any Of The Following :</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked7 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test7('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>7. In The Last 12 Months Have You Had Any Of The Following :</Text>
+                                        <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked7 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test7('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked7 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test7('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked7 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test7('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
 
+                                        </View>
                                     </View>
-
                                     {dropdounHide7 ? (
-                                        <View style={{ zIndex: 7, flexDirection: "row", width: "100%", }}>
-
-                                            <View style={{ zIndex: 7, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open7}
-                                                    value={value7}
-                                                    items={items7}
-                                                    multiple={true}
-                                                    setOpen={setopen7}
-                                                    setValue={setValue7}
-                                                    setItems={setItems7}
-                                                    onOpen={Close7}
-                                                    zIndex={1000}
-                                                    zIndexInverse={1000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(1) }}
-
-                                                />
-                                            </View>
+                                        <View style={{ zIndex: 5, flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items7}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value7}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 3', item)
+                                                    setValue7(item);
+                                                }}
+                                            />
                                         </View>
                                     ) : null}
 
                                 </View>
-                                <View style={{ height: moderateScale(160), width: '95%', flexDirection: 'column', marginBottom: moderateScale(15) }}>
-                                    <Text style={{ fontSize: scale(15), color: 'black' }}>8. Have You Ever Had Any Of The Following (Permanent Defer) :</Text>
-                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
-                                        <RadioButton
-                                            value="yes"
-                                            color={color.red}
-                                            status={checked8 === 'yes' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test8('yes')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+                                <View style={{ width: '95%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', marginBottom: scale(20), }}>
+                                    <View style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', paddingBottom: scale(10) }}>
+                                        <Text style={{ fontSize: scale(15), color: 'black' }}>8. Have You Ever Had Any Of The Following (Permanent Defer) :</Text>
+                                        <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40, }}>
+                                            <RadioButton
+                                                value="yes"
+                                                color={color.red}
+                                                status={checked8 === 'yes' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test8('yes')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>Yes</Text>
 
-                                        <RadioButton
-                                            value="no"
-                                            color={color.red}
-                                            status={checked8 === 'no' ? 'checked' : 'unchecked'}
-                                            onPress={() => Test8('no')}
-                                        />
-                                        <Text style={{ fontSize: 15, }}>No</Text>
+                                            <RadioButton
+                                                value="no"
+                                                color={color.red}
+                                                status={checked8 === 'no' ? 'checked' : 'unchecked'}
+                                                onPress={() => Test8('no')}
+                                            />
+                                            <Text style={{ fontSize: 15, }}>No</Text>
 
+                                        </View>
                                     </View>
                                     {dropdounHide8 ? (
-                                        <View style={{ zIndex: 8, flexDirection: "row", width: "100%", }}>
+                                        <View style={{ zIndex: 5, flexDirection: "column", width: "100%", }}>
+                                            <MultiSelect
+                                                style={[styles.dropdown, isFocus3 && { borderColor: '#85060F' }]}
+                                                selectedTextStyle={styles.selectedTextStyle}
+                                                inputSearchStyle={styles.inputSearchStyle}
+                                                search
+                                                keyboardAvoiding={true}
+                                                dropdownPosition="BOTTOM"
+                                                data={items8}
+                                                maxHeight={200}
+                                                labelField="label"
+                                                valueField="value"
+                                                placeholder="Select an item"
+                                                searchPlaceholder="Search..."
+                                                value={value8}
+                                                containerStyle={{ borderColor: "red", position: 'relative', }}
+                                                onChange={item => {
+                                                    console.log('heeellle multi 8', item)
+                                                    SafeSex1(item)
+                                                    setValue8([])
+                                                }}
 
-                                            <View style={{ zIndex: 8, justifyContent: "center", marginTop: moderateScale(5), width: '100%', backgroundColor: 'white' }}>
-                                                <DropDownPicker
-                                                    dropDownDirection="BOTTOM"
-                                                    open={open8}
-                                                    value={value8}
-                                                    items={items8}
-                                                    multiple={false}
-                                                    onSelectItem={(item) => {
-                                                        SafeSex1(item)
-                                                    }}
-                                                    setOpen={setopen8}
-                                                    setValue={setValue8}
-                                                    setItems={setItems8}
-                                                    onOpen={Close8}
-                                                    zIndex={1000}
-                                                    zIndexInverse={1000}
-                                                    containerStyle={{ borderColor: "blue", position: 'relative', bottom: scale(1) }}
-
-                                                />
-                                            </View>
+                                            />
                                         </View>
                                     ) : null}
 
@@ -1080,3 +1038,30 @@ const FirstForm1 = ({ }) => {
     )
 }
 export default FirstForm1;
+const styles = StyleSheet.create({
+    dropdown: {
+        height: 50,
+        backgroundColor: 'white',
+        borderWidth: scale(1),
+        padding: scale(15),
+        borderRadius: 5,
+        letterSpacing: 1,
+        fontSize: scale(15),
+        fontWeight: '400',
+        color: 'black',
+    },
+    selectedTextStyle: {
+        fontSize: 12,
+        color: 'black',
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+    },
+    icon: {
+        marginRight: 5,
+    },
+    selectedStyle: {
+        borderRadius: 12,
+    },
+});

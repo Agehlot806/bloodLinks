@@ -42,11 +42,11 @@ const DrawerHeader = (props) => {
         <View style={{
           height: moderateScale(40),
           width: '80%',
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "center", 
         }}>
-          <Text style={{ color: "#F5F5F5", fontSize: scale(16), fontWeight: '600', letterSpacing: 0.9, width: scale(150) }}>{name}</Text>
+          <Text style={{ color: "#F5F5F5", fontSize: scale(15), fontWeight: '600',  width: "60%",textAlign:'center' }}>{name}</Text>
         </View>
 
       </View>

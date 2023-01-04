@@ -18,7 +18,7 @@ import image from '../assets/Images';
 import { COLOR } from '../constants/colorConstants';
 const { width, height } = Dimensions.get('window');
 
-const HOME = () => {
+const HOME = ({ route }) => {
   const navigation = useNavigation();
   const [hospitalboollist, sethospitalboollist] = useState([]);
   const [ajaxRequesting, setAjaxRequesting] = useState(true);
@@ -124,16 +124,13 @@ const HOME = () => {
     })
       .then((Response) => Response.json())
       .then((Response) => {
-        console.log('RESPONSE apiiii Profile-------------->>>>', Response)
         console.log('RESPONSE apiiii Profile name-------------->>>>', Response[0].first_name)
         console.log('RESPONSE apiiii Profile last-------------->>>>', Response[0].last_name)
-
         setname(Response[0].first_name)
         setLastname(Response[0].last_name)
       })
       .catch((error) => {
         console.error("ERROR FOUND" + error);
-        // alert("Server Error !");
       })
   }
   const Gender = async () => {
@@ -144,7 +141,7 @@ const HOME = () => {
     return (
       <View style={styles.homeHeader}>
         <View style={styles.homeSearchHeader}>
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} >
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
             <Image
               style={styles.heardingMenuImg}
               source={image.menu}
@@ -153,12 +150,12 @@ const HOME = () => {
           <View style={styles.headerContent}>
             <View>
               <Image
-                style={{ height: scale(30), width: scale(30), tintColor: 'white' }}
+                style={{ height: scale(26), width: scale(26), tintColor: 'white' }}
                 source={image.profile}
               />
             </View>
-            <View style={{ height: scale(40), width: scale(210), alignItems: 'flex-start', justifyContent: 'center', paddingLeft: scale(7) }}>
-              <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '700', letterSpacing: scale(0.15), }}>Welcome {name} {Lastname}</Text>
+            <View style={{ height: scale(40), width: scale(210), alignItems: 'flex-start', justifyContent: 'center', paddingLeft: scale(7), }}>
+              <Text style={{ color: 'white', fontSize: scale(13), fontWeight: '600', width: scale(210), }}>Welcome {name}{Lastname}</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -175,9 +172,7 @@ const HOME = () => {
       </View>
     )
   }
-
   return (
-
     <View style={styles.container}>
       <StatusTopBar />
       <HeaderHome />
@@ -192,16 +187,15 @@ const HOME = () => {
             renderItem={_renderItem}
           />
         </View>
-
-        <View style={{ height: moderateScale(170), flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(7), margin: scale(4) }}>
+        <View style={{ height: moderateScale(170), flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(7), backgroundColor:'#f4f4f4',marginHorizontal:scale(2) }}>
           <TouchableOpacity onPress={() => navigation.navigate('BloodBank')} style={{
-            height: moderateScale(150),
-            width: '30%',
+            height: moderateScale(145),
+            width: '31%',
             borderWidth: 2,
             borderColor: "#E8E8E8",
             borderRadius: 8,
             backgroundColor: "#FFFFFF",
-            margin: scale(5)
+            margin: scale(7)
           }}>
             <View style={{
               height: moderateScale(80),
@@ -216,20 +210,19 @@ const HOME = () => {
               />
             </View>
             <View style={{
-              height: moderateScale(20),
-              width: 60,
+              height: moderateScale(40),
+              width: scale(105),
               justifyContent: "center",
-              alignItems: "center", marginLeft: moderateScale(20),
+              alignItems: "center",
               top: scale(5),
             }}>
-              <Text style={{ color: "#000000", fontSize: scale(14), textAlign: "center", top: scale(8), fontWeight: "600", width: scale(90) }}>Find Blood</Text>
-              <Text style={{ color: "#000000", fontSize: scale(14), textAlign: "center", top: scale(10), fontWeight: "600", marginLeft: 3 }}>Banks </Text>
+              <Text style={{ color: "#000000", fontSize: scale(10.5), textAlign: "center", fontWeight: "600", width: scale(90) }}>Find Blood Banks</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Hospitals')}
             style={{
-              height: moderateScale(150),
-              width: '30%',
+              height: moderateScale(145),
+              width: '31%',
               borderWidth: 2,
               borderColor: "#E8E8E8",
               borderRadius: 8,
@@ -247,21 +240,20 @@ const HOME = () => {
                 source={require('../assets/icons/hospital.png')}
               />
             </View>
+
             <View style={{
-              height: moderateScale(20),
-              width: 60,
+              height: moderateScale(40),
+              width: scale(105),
               justifyContent: "center",
-              alignItems: "center", marginLeft: moderateScale(20),
+              alignItems: "center",
               top: scale(5),
             }}>
-              <Text style={{ color: "#000000", fontSize: scale(14), textAlign: "center", top: scale(8), fontWeight: "600", width: scale(90) }}>Find </Text>
-              <Text style={{ color: "#000000", fontSize: scale(14), textAlign: "center", top: scale(10), fontWeight: "600", width: scale(90), marginLeft: 3 }}>Hospitals</Text>
+              <Text style={{ color: "#000000", fontSize: scale(10.5), textAlign: "center", fontWeight: "600", width: scale(90) }}>Find Hospitals</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Labs')} style={{
-            height: moderateScale(150),
-            height: moderateScale(150),
-            width: '30%',
+            height: moderateScale(145),
+            width: '31%',
             borderWidth: 2,
             borderColor: "#E8E8E8",
             borderRadius: 8,
@@ -281,13 +273,13 @@ const HOME = () => {
               />
             </View>
             <View style={{
-              height: moderateScale(20),
-              width: 60,
+              height: moderateScale(40),
+              width: scale(105),
               justifyContent: "center",
-              alignItems: "center", marginLeft: moderateScale(20),
+              alignItems: "center",
               top: scale(5),
             }}>
-              <Text style={{ color: "#000000", fontSize: scale(14), textAlign: "center", top: scale(8), fontWeight: "600", width: scale(90), marginLeft: scale(7) }}>Find Labs</Text>
+              <Text style={{ color: "#000000", fontSize: scale(10.5), textAlign: "center", fontWeight: "600", width: scale(90) }}>Find Labs</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -295,19 +287,15 @@ const HOME = () => {
           <TouchableOpacity
             style={styles.headerBtn}
             onPress={() => navigation.navigate('FirstForm')}>
-            <Text style={{ color: 'white', fontSize: scale(17.5), fontWeight: '600', textAlign: 'center' }}>DONATE BLOOD</Text>
-
+            <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '600', textAlign: 'center',width:'100%' }}>DONATE BLOOD</Text>
           </TouchableOpacity>
-
         </View>
-
         <View style={{ justifyContent: 'center', paddingHorizontal: 30, marginTop: 10 }}>
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: 'black' }]}
             onPress={() => navigation.navigate('RequestBlood')}>
-            <Text style={{ color: 'white', fontSize: scale(17.5), fontWeight: '600', textAlign: 'center' }}>REQUEST BLOOD</Text>
+            <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '600', textAlign: 'center',width:'100%' }}>REQUEST BLOOD</Text>
           </TouchableOpacity>
-
         </View>
         <View style={{ height: scale(260), alignItems: 'center', justifyContent: 'center' }}>
           <SwiperFlatList
@@ -320,22 +308,17 @@ const HOME = () => {
           />
         </View>
       </ScrollView>
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
   hearding: {
     alignItems: 'center',
     height: height * 0.06,
     justifyContent: 'center',
-    // justifyContent: 'space-between',
     flexDirection: 'column',
     backgroundColor: COLOR.WHITE,
-    // position: 'relative',
-    // zIndex: 1000,
   },
 
   homeHeader: {
@@ -343,13 +326,12 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.PRIMARY,
     paddingHorizontal: width * 0.02,
     paddingVertical: height * 0.02,
-
   },
   homeSearchHeader: {
     flexDirection: 'row',
     marginBottom: height * 0.03,
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent: 'center'
   },
   headerBtn: {
     height: moderateScale(50),
@@ -369,26 +351,25 @@ const styles = StyleSheet.create({
     paddingVertical: height * 0.03,
     width: "100%",
   },
-
   heardingArrow: {
     height: scale(30),
     width: width * 0.12,
-    alignItems: 'center', justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   heardingArrowImg: {
-    height: scale(28),
-    width: scale(27),
+    height: scale(23),
+    width: scale(23),
     alignItems: 'center',
     justifyContent: 'center'
-
   },
   heardingSearch: {
     height: height * 0.025,
     width: width * 0.043,
   },
   heardingMenuImg: {
-    height: scale(31),
-    width: scale(31),
+    height: scale(23),
+    width: scale(25),
     marginLeft: scale(8),
   },
   headerContent: {
