@@ -4,9 +4,8 @@ import { Share } from 'react-native';
 export const onShare = async (item, name, address) => {
     try {
         const result = await Share.share({
-            message:
-                `${name} :${item.name} 
-                ${address} :${item.address_1}`,
+            message: `${name} :${item.name}
+${address} :${item.address_1}`,
 
 
         });

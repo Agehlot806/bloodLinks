@@ -76,12 +76,14 @@ const Profile = props => {
         setSaveaImage(pic);
       })
       .catch((error) => {
+        alert("Network Server Error");
         console.error("ERROR FOUND" + error);
-        // alert("Server Error !");
-      })
+       })
   }
+
   const profFunct = async () => {
     await AsyncStorage.removeItem('User')
+    await AsyncStorage.removeItem('Photo')
     navigation.dispatch(StackActions.replace('Login'))
   }
   return (
@@ -89,18 +91,17 @@ const Profile = props => {
       <StatusTopBar />
       <DrawerHeader name={'My Profile'} image1={true} />
       <View style={styles.profile}>
-        <View style={{ height: moderateScale(155), width: '100%', alignItems: 'center', justifyContent: 'center', flexDirection: 'column',}}>
-          <View style={{ height: moderateScale(150), width: '50%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EF486A', borderRadius: 100, flexDirection: 'row' }}>
+        <View style={{ height: moderateScale(125), width: '100%', alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'column', }}>
+          <View style={{ height: moderateScale(110), width: '30%', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 100, flexDirection: 'row' }}>
             <Image
-              style={{ height: height * 0.19, width: '95%', borderRadius: 100 }}
+              style={{ height: moderateScale(105), width: '95%', borderRadius: 100 }}
               resizeMode='cover'
               source={{ uri: saveaImage }}
             />
-
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit')} style={{ height: scale(36), width: '14%', backgroundColor: 'white', bottom: scale(40), left: scale(50), borderRadius: scale(20), alignItems: 'center', padding: scale(1) }}>
+          <TouchableOpacity onPress={() => navigation.navigate('ProfileEdit')} style={{ height: scale(35.5), width: '10%', backgroundColor: 'white', bottom: scale(35), left: scale(35), borderRadius: scale(20), alignItems: 'center', padding: scale(1) }}>
             <Image
-              style={{ height: 48, width: 48, bottom: 4.3, }}
+              style={{ height: 45, width: 45, bottom: 2.6, }}
               source={require('../assets/icons/edit1.png')}
             />
           </TouchableOpacity>
@@ -109,7 +110,7 @@ const Profile = props => {
           <Text style={styles.profileName}>{name} {Lastname}</Text>
         </View>
       </View>
-      <ScrollView style={{ flex: 1, width: '100%',   }}>
+      <ScrollView style={{ flex: 1, width: '100%', }}>
         <View style={styles.profileDeatils}>
           <View style={styles.imgCon}>
             <Image
@@ -142,10 +143,9 @@ const Profile = props => {
         <View style={styles.profileDeatils}>
           <View style={styles.imgCon}>
             <Image
-              style={[styles.icon,{height: height * 0.05,width: width * 0.09,}]}
+              style={[styles.icon, { height: height * 0.05, width: width * 0.09, }]}
               source={require('../assets/icons/lavatory.png')}
             />
-
           </View>
           <Text style={styles.profileDeatilsTitle}>{Gender}</Text>
         </View>
@@ -155,7 +155,6 @@ const Profile = props => {
               style={styles.icon}
               source={require('../assets/icons/bloodDrop.png')}
             />
-
           </View>
           <Text style={styles.profileDeatilsTitle}>{blood_group}</Text>
         </View>
@@ -169,7 +168,7 @@ const Profile = props => {
           </View>
           <Text style={styles.profileDeatilsTitle}>{address}</Text>
         </View>
-        <TouchableOpacity onPress={() => profFunct()} style={[styles.profileDeatils,{marginBottom:scale(80)}]}>
+        <TouchableOpacity onPress={() => profFunct()} style={[styles.profileDeatils, { marginBottom: scale(80) }]}>
           <View style={styles.imgCon}>
             <Image
               style={styles.icon}
@@ -191,10 +190,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
   },
   profile: {
-    backgroundColor: 'rgba(254,230,230,255)',
-    borderRadius: 100 / 10,
-    paddingVertical: height * 0.010,
-    width: '80%',
+    height: moderateScale(200),
+    backgroundColor: 'black',
+    width: '100%',
     elevation: 3,
     shadowColor: '#000',
     alignItems: 'center',
@@ -206,15 +204,13 @@ const styles = StyleSheet.create({
     shadowColor: 'lightgrey',
     shadowOpacity: 0.7,
     shadowRadius: 8,
-    top: 20,
-    marginBottom: moderateScale(23),
+    marginBottom: moderateScale(25),
     paddingTop: moderateScale(18)
   },
   profileName: {
-    color: '#EF486A',
-    fontSize: scale(26),
+    color: 'white',
+    fontSize: scale(19),
     fontWeight: 'bold',
-    paddingTop: height * 0.01,
     textTransform: 'capitalize',
     textAlign: 'center',
     width: scale(230),
@@ -236,8 +232,8 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     color: 'black',
     paddingRight: width * 0.13,
-    width:'71%',
-    fontWeight:'500', 
+    width: '71%',
+    fontWeight: '500',
   },
   profileDeatil: {
     fontSize: width * 0.05,
@@ -245,15 +241,15 @@ const styles = StyleSheet.create({
   },
   imgCon: {
     flexDirection: 'row',
-    width: '25%',
+    width: '22%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   icon: {
     height: height * 0.04,
     width: width * 0.08,
     marginRight: width * 0.05,
-    tintColor:'#b31d27'
+    tintColor: '#b31d27'
   },
 });
 export default Profile;

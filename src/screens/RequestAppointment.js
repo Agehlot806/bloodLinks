@@ -3,7 +3,7 @@ import {
     View,
     Text,
     TextInput,
-    Image,
+    Dimensions,
     StyleSheet,
     ScrollView,
     TouchableOpacity,
@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
 import { COLOR } from '../constants/colorConstants';
-import ModalDropdown from 'react-native-modal-dropdown';
+import { Dropdown } from 'react-native-element-dropdown';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from 'moment'
@@ -21,6 +21,8 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import DrawerHeader from "../Components/DrawerHeader";
 import color from "../constants/colorConstants";
 import { useEffect } from "react";
+const { width, height } = Dimensions.get('window');
+
 const Appointment = () => {
     const [day, setday] = useState();
     const [Month, setMonth] = useState();
@@ -30,6 +32,10 @@ const Appointment = () => {
     const [Data, setData] = useState([]);
     const [Item, setItem] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isFocus1, setIsFocus1] = useState(false);
+    const [isFocus2, setIsFocus2] = useState(false);
+    const [CityList, setCityList] = useState([]);
+    const [PinList, setPinList] = useState([]);
     // const [FormId1, setFormId] = useState();
 
 
@@ -58,6 +64,21 @@ const Appointment = () => {
             .then((response) => {
                 setData(response)
                 console.log('response api data ----->>>>>', response)
+                var states = Object.keys(response).length;
+                let CityArray = [];
+                let PinCode = [];
+                for (var i = 0; i < states; i++) {
+                    CityArray.push({
+                        value: response[i].address_1,
+                        label: response[i].address_1,
+                    })
+                    PinCode.push({
+                        value: response[i].pincode,
+                        label: response[i].pincode,
+                    })
+                }
+                setCityList(CityArray);
+                setPinList(PinCode);
                 setIsLoading(false);
 
             })
@@ -170,13 +191,15 @@ const Appointment = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
-                    width: '95%',
-                    backgroundColor: 'white',margin:scale(10),paddingVertical:scale(5)
+                    width: '100%',
+                    backgroundColor: 'white',  
+                    borderRadius: moderateScale(10),
                 }}>
                 <View style={{
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: '77%',
+                    width: '70%',
+                    marginBottom: scale(5)
                 }}>
                     <View style={{
                         alignItems: 'center',
@@ -211,7 +234,7 @@ const Appointment = () => {
                     </View>
 
                 </View>
-                <TouchableOpacity onPress={() => ModalAppoinmete(item)} style={{ height: moderateScale(55), width: '20%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#278838', borderRadius: moderateScale(6), marginRight: moderateScale(5), marginLeft: moderateScale(4), }}>
+                <TouchableOpacity onPress={() => ModalAppoinmete(item)} style={{ height: moderateScale(45), width: '25%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black',  marginRight: moderateScale(5), marginLeft: moderateScale(4), }}>
                     <Text style={{ fontSize: scale(16), textAlign: 'center', color: 'white' }}>
                         Book
                     </Text>
@@ -355,47 +378,63 @@ const Appointment = () => {
                 <View style={{ alignItems: 'center', width: '100%', justifyContent: 'center', }}>
                     <Text style={{ fontSize: 20, }}>Schedule Appointment</Text>
 
-                    <View style={{ flexDirection: 'column', height: moderateScale(100), width: '90%', }}>
+                    <View style={{ flexDirection: 'column', height: moderateScale(100), width: '93%',   }}>
                         <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between', }}>
-                            <ModalDropdown
-                                style={{ justifyContent: 'center', width: '45%', height: moderateScale(50), justifyContent: 'center', borderRadius: moderateScale(10), borderColor: '#ccc', borderWidth: 1, justifyContent: 'center' }}
-                                onSelect={(index, value) => setday(value)}
-                                options={Data.map((item) => (
-                                    item.address_1
-                                ))}
-                                defaultValue={'Select City'}
-                                dropdownTextStyle={{ backgroundColor: '#fff', fontSize: 16, color: 'black' }}/*Style here*/
-                                textStyle={{ fontSize: 16, color: 'grey', alignSelf: 'flex-start', marginLeft: 10 }}
-                                dropdownStyle={{
-                                    backgroundColor: COLOR.DROPDOWNBG,
-                                    elevation: 5,
-                                    width: moderateScale(130),
-
+                            <Dropdown
+                                style={[styles.input, isFocus1 && { borderColor: '#85060F' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                itemContainerStyle={{ borderColor: 'gray', borderWidth: 1, }}
+                                containerStyle={{ borderColor: 'gray', borderWidth: 1, }}
+                                activeColor='#FDDDE0'
+                                dropdownPosition='bottom'
+                                data={CityList}
+                                search
+                                maxHeight={250}
+                                labelField="label"
+                                valueField="value"
+                                placeholder={'Select City'}
+                                searchPlaceholder="Search..."
+                                value={day}
+                                onFocus={() => setIsFocus1(true)}
+                                onBlur={() => setIsFocus1(false)}
+                                onChange={item => {
+                                    setday(item.value)
+                                    console.log('map data on change City', item)
+                                    setIsFocus2(false);
                                 }}
-                            >
-                            </ModalDropdown>
 
-
-                            <ModalDropdown
-                                style={{ justifyContent: 'center', width: '45%', height: moderateScale(50), justifyContent: 'center', borderRadius: moderateScale(10), borderColor: '#ccc', borderWidth: 1, justifyContent: 'center' }}
-                                onSelect={(index, value) => setMonth(value)}
-                                options={Data.map((item) => (
-                                    item.pincode
-                                ))}
-                                defaultValue={'Select Pincode'}
-                                dropdownTextStyle={{ backgroundColor: '#fff', fontSize: 16, color: 'black', }}/*Style here*/
-                                textStyle={{ fontSize: 16, color: 'grey', alignSelf: 'flex-start', marginLeft: 10 }}
-                                dropdownStyle={{
-                                    backgroundColor: COLOR.DROPDOWNBG,
-                                    elevation: 5,
-                                    width: moderateScale(130),
+                            />
+                            <Dropdown
+                                style={[styles.input, isFocus2 && { borderColor: '#85060F' }]}
+                                placeholderStyle={styles.placeholderStyle}
+                                selectedTextStyle={styles.selectedTextStyle}
+                                inputSearchStyle={styles.inputSearchStyle}
+                                itemContainerStyle={{ borderColor: 'gray', borderWidth: 1.5, }}
+                                containerStyle={{ borderColor: 'gray', borderWidth: 1, }}
+                                activeColor='#FDDDE0'
+                                dropdownPosition='bottom'
+                                data={PinList}
+                                search
+                                maxHeight={250}
+                                labelField="label"
+                                valueField="value"
+                                placeholder={'Select PinCode'}
+                                searchPlaceholder="Search..."
+                                value={Month}
+                                onFocus={() => setIsFocus2(true)}
+                                onBlur={() => setIsFocus2(false)}
+                                onChange={item => {
+                                    setMonth(item.value)
+                                    setIsFocus2(false);
                                 }}
-                            >
-                            </ModalDropdown>
 
+                            />
                         </View>
 
                     </View>
+                     
                     <View style={{ alignItems: 'center', flexDirection: 'column', justifyContent: 'center', height: moderateScale(50), width: '100%', marginTop: moderateScale(5), }}>
                         <View style={{ height: moderateScale(50), width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', }}>
                             <TouchableOpacity onPress={() => setIsLoading(true)} style={{ height: moderateScale(40), width: '45%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', borderRadius: moderateScale(2), marginRight: moderateScale(5), }}>
@@ -431,4 +470,32 @@ const Appointment = () => {
     )
 }
 export default Appointment;
+const styles = StyleSheet.create({
+    placeholderStyle: {
+        fontSize: 16,
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+    },
+
+    inputSearchStyle: {
+        height: 45,
+        fontSize: 18,
+        width: '82%',
+        marginLeft: 16,
+    },
+    input: {
+        height: height * 0.07,
+        width: scale(154),
+        borderWidth: scale(1.40),
+        padding: width * 0.03,
+        borderRadius: 5,
+        letterSpacing: 1,
+        fontSize: scale(16.5),
+        fontWeight: '400',
+        color: 'black',
+        marginBottom: scale(15)
+    },
+
+});
 

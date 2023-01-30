@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TouchableOpacity, View, Text, Modal, StyleSheet, ScrollView } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { moderateScale, scale } from 'react-native-size-matters';
@@ -362,15 +362,15 @@ const FirstForm1 = ({ }) => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: "column", position: 'relative', }}>
             <DrawerHeader name={'Blood Donation'} image1={false} />
-            <View style={{ height: moderateScale(35), width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-end', paddingRight: moderateScale(10), }}>
-                <Text style={{ fontSize: scale(18) }}>
+            <View style={{ height: moderateScale(35), width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-start', paddingLeft: moderateScale(10),backgroundColor:'black' }}>
+                <Text style={{ fontSize: scale(18),color:'white' }}>
                     Step 1
                 </Text>
             </View>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ alignItems: 'center', width: '100%', justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, }}>Criteria For Blood Donation</Text>
-                    <View style={{ height: moderateScale(80), width: '100%', flexDirection: 'column' }}>
+                    <Text style={{ fontSize: 20,fontWeight:'200',top:scale(5),color:'black' }}>Criteria For Blood Donation</Text>
+                    <View style={{ height: moderateScale(80), width: '100%', flexDirection: 'column',margin:scale(7) }}>
                         <Text style={{ fontSize: scale(15), color: 'black' }}>1. When you Donate The Blood</Text>
                         <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40 }}>
                             <RadioButton style={{ height: 0, width: 20 }}

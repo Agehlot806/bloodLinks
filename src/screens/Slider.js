@@ -14,38 +14,25 @@ const vw = Dimensions.get('window').width / 100;
 const vh = Dimensions.get('window').height / 100;
 const { width, height } = Dimensions.get('window');
 import { COLOR } from '../constants/colorConstants';
-import { scale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
+import image from '../assets/Images';
 const slides = [
   {
     key: 1,
-    title: 'Donate Blood ',
-    text: 'Donate Blood - Help Building Community ',
-    image: require('../assets/Images/slider1.png'),
-
-    backgroundColor: '#59b2ab',
+    image: image.slider1,
+    // backgroundColor: '#59b2ab',
   },
   {
     key: 2,
-    title: 'Ralse Request  ',
-    text: 'Building Nation ',
-    image: require('../assets/Images/slider2.png'),
-
-    backgroundColor: '#febe29',
+    image: image.slider2,
+    // backgroundColor: '#febe29',
   },
   {
     key: 3,
-    title: 'Discover Products ',
-    text: 'Automated WorkFlows ',
-    image: require('../assets/Images/slider3.png'),
-    backgroundColor: '#22bcb5',
+    image: image.slider3,
+    // backgroundColor: '#22bcb5',
   },
-  {
-    key: 4,
-    title: 'Security and Privacy ',
-    text: 'Adherence to health and data ',
-    image: require('../assets/Images/slider4.png'),
-    backgroundColor: '#22bcb5',
-  },
+
 ];
 const Slider = (props) => {
   const navigation = props.navigation;
@@ -54,23 +41,10 @@ const Slider = (props) => {
   const renderItem = ({ item }) => {
     return (
 
-      <View>
+      <View style={{ flex: 1, }}>
         <StatusTopBar />
-        <ImageBackground source={item.image} style={styles.image}>
-          <View style={styles.setmargin}>
-            <View style={styles.imgTxt}>
-              <View style={{ width: '80%', alignItems: 'center', justifyContent: 'center', }}>
-                <Text style={styles.Txt}>{item.title} </Text>
-              </View>
-              <View style={{ width: '80%', alignItems: 'center', justifyContent: 'center', }}>
-                <Text
-                  style={[styles.Txt, { fontWeight: '400', fontSize: scale(14), }]}>
-                  {item.text}
-                </Text>
-              </View>
+        <ImageBackground source={item.image} style={styles.image} resizeMode={'cover'}>
 
-            </View>
-          </View>
         </ImageBackground>
       </View>
     );
@@ -89,6 +63,7 @@ const Slider = (props) => {
     const IdUser = await AsyncStorage.getItem('User')
     if (IdUser == null) {
       navigation.navigate("Login")
+      // navigation.navigate('Home')
     } else {
       navigation.navigate('Home')
     }
@@ -104,12 +79,11 @@ const Slider = (props) => {
       onDone={onDone}
       onSkip={onSkip}
       showSkipButton={true}
-      activeDotStyle={{ width: 15, backgroundColor: COLOR.DROPDOWNBG }}
+      activeDotStyle={{ width: 15, backgroundColor: COLOR.BLACK }}
       dotStyle={{ backgroundColor: COLOR.DROPDOWNBG }}
     />
   );
 }
-
 const styles = StyleSheet.create({
   buttonCircle: {
     width: 40,
@@ -121,7 +95,9 @@ const styles = StyleSheet.create({
   },
   image: {
     height: height * 1,
-    width: width * 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   setmargin: {
     top: width * 1.18,
@@ -130,6 +106,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'column',
+    height: scale(90),
+    marginTop: moderateScale(6)
   },
   Txt: {
     color: COLOR.WHITE,

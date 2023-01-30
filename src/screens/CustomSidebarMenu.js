@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Pressable, Dimensions, StyleSheet, View, Text, Image, ScrollView, Share } from 'react-native';
+import { Pressable, Dimensions, StyleSheet, View, Text, Image, ScrollView, Share, Linking } from 'react-native';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import image from '../assets/Images';
@@ -10,8 +10,7 @@ const CustomSidebarMenu = props => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message:
-          'React Native | Blood links Application',
+        message: 'https://play.google.com/store/apps/details?id=com.bloodlinks&hl=en',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -82,7 +81,7 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'Home'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'Home'}</Text>
           </View>
         </Pressable>
         <Pressable
@@ -102,10 +101,10 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{ color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'My Profile'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'My Profile'}</Text>
           </View>
         </Pressable>
-         
+
         <Pressable
           onPress={() => onShare()}
           style={styles.Drawerscenestyle}>
@@ -121,7 +120,7 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'Refer Friend'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'Refer Friend'}</Text>
           </View>
         </Pressable>
         <Pressable
@@ -141,7 +140,7 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'Donate History'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'Donate History'}</Text>
           </View>
         </Pressable>
         <Pressable
@@ -161,7 +160,7 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'Requests'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'Requests'}</Text>
           </View>
         </Pressable>
         <Pressable
@@ -181,16 +180,16 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'Hospital Services'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'Hospital Services'}</Text>
           </View>
         </Pressable>
         <Pressable
           onPress={() => {
-            navigation.navigate('Notificationscreen');
+            Linking.openURL('https://www.bloodlinks.in/about')
           }}
           style={styles.Drawerscenestyle}>
           <Image
-            source={image.Notification}
+            source={image.about}
             style={{
               width: '23%',
               height: scale(29),
@@ -201,7 +200,7 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'Notifications'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'About Us'}</Text>
           </View>
         </Pressable>
         <Pressable
@@ -219,10 +218,9 @@ const CustomSidebarMenu = props => {
             resizeMode="contain"
           />
           <View>
-            <Text style={{color: 'white', width:scale(140), fontSize: scale(14), fontWeight: '500',textAlign:'left' }}>{'LogOut'}</Text>
+            <Text style={{ color: 'white', width: scale(140), fontSize: scale(14), fontWeight: '500', textAlign: 'left' }}>{'LogOut'}</Text>
           </View>
         </Pressable>
-
       </ScrollView>
     </View>
   );

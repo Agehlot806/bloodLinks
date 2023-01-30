@@ -34,8 +34,12 @@ const Login = () => {
   const [visible, setVisible] = React.useState(false);
   const onDismissSnackBar = () => setVisible(false);
   const loginPage = () => {
+    // var reg = (/^[0-9]{1,10}$/$(Phonenumber));
+
     if (Phonenumber == '') {
       setphoneError('#85060F')
+    } else if (Phonenumber.length < 10) {
+      alert('please fill 10 digit number')
     } else {
       LoginFunction();
       // navigation.navigate('Otp')
@@ -57,7 +61,6 @@ const Login = () => {
 
   const LoginFunction = () => {
     let url = `https://bloodlinks.in/login?cust_mobile=${Phonenumber}`   //API to render signup
-
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -83,8 +86,10 @@ const Login = () => {
           })
         }
         else {
-          alert("Phone Number is Not Found");
-          navigation.navigate('SignUp')
+          alert("Number Not registered");
+          navigation.navigate('SignUp', {
+            NumberS: Phonenumber,
+          })
           console.log('RESPONSE Status-------------->>>>', Response.status)
         }
 

@@ -28,7 +28,7 @@ const DrawerHeader = (props) => {
       }}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={{
           height: moderateScale(40),
-          width: "15%",
+          width: "11%",
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -41,12 +41,12 @@ const DrawerHeader = (props) => {
         </TouchableOpacity>
         <View style={{
           height: moderateScale(40),
-          width: '80%',
+          width: '76%',
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center", 
         }}>
-          <Text style={{ color: "#F5F5F5", fontSize: scale(15), fontWeight: '600',  width: "60%",textAlign:'center' }}>{name}</Text>
+          <Text style={{color:"#F5F5F5",fontSize:scale(14),fontWeight:'600',width:"60%",textAlign:'center'}}>{name}</Text>
         </View>
 
       </View>

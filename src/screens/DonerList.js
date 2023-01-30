@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import {
   View,
   Text,
@@ -13,7 +12,6 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLOR } from '../constants/colorConstants';
-import { Avatar } from 'react-native-elements';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment'
 import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
@@ -104,6 +102,7 @@ const DonerList = props => {
         setrequest_id(Response[0].id)
       })
       .catch((error) => {
+        // alert("Network Server Error");
         console.error("ERROR FOUND" + error);
       })
   }
@@ -162,12 +161,12 @@ const DonerList = props => {
         justifyContent: 'center',
         flexDirection: 'column',
         width: moderateScale(350),
-        height: moderateScale(180),
+        height: moderateScale(185),
         backgroundColor: 'white',
         shadowColor: '#93121B',
         borderWidth: scale(1),
         borderColor: '#93121B',
-        borderRadius: moderateScale(10),
+        borderRadius: moderateScale(5),
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
         elevation: 5,
@@ -181,7 +180,7 @@ const DonerList = props => {
           flexDirection: 'row',
           width: '97%',
           height: moderateScale(170),
- 
+
         }}>
         <View style={{
           alignItems: 'center',
@@ -193,8 +192,8 @@ const DonerList = props => {
             alignItems: 'center',
             justifyContent: 'flex-start',
             flexDirection: 'row',
-            height: moderateScale(35),
-           }}>
+            height: moderateScale(30),
+          }}>
             <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Organization Name :-</Text>
           </View>
           <View style={{
@@ -203,14 +202,14 @@ const DonerList = props => {
             flexDirection: 'row',
             width: '100%',
           }}>
-            <Text style={{ fontSize: scale(13), paddingLeft: 3,color: 'grey', fontWeight: '500',width: '100%', }}>{item.name}</Text>
+            <Text style={{ fontSize: scale(13), paddingLeft: 3, color: 'grey', fontWeight: '500', width: '100%', }}>{item.name}</Text>
           </View>
           <View style={{
             alignItems: 'center',
             justifyContent: 'flex-start',
             flexDirection: 'row',
             height: moderateScale(35),
-           }}>
+          }}>
             <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Requested Date :-</Text>
           </View>
 
@@ -220,14 +219,14 @@ const DonerList = props => {
             flexDirection: 'column',
             width: '100%',
           }}>
-            <Text style={{fontSize: scale(13), paddingLeft: 3,color: 'grey', fontWeight: '500',width: '100%', }}>{item.requested_schedule_date}</Text>
+            <Text style={{ fontSize: scale(13), paddingLeft: 3, color: 'grey', fontWeight: '500', width: '100%', }}>{item.requested_schedule_date}</Text>
           </View>
           <View style={{
             alignItems: 'center',
             justifyContent: 'flex-start',
             flexDirection: 'row',
             height: moderateScale(35),
-           }}>
+          }}>
             <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Request Id :-</Text>
           </View>
 
@@ -237,12 +236,12 @@ const DonerList = props => {
             flexDirection: 'column',
             width: '100%',
           }}>
-            <Text style={{ fontSize: scale(13), paddingLeft: 3,color: 'grey', fontWeight: '500',width: '100%',}}>{item.id}</Text>
+            <Text style={{ fontSize: scale(13), paddingLeft: 3, color: 'grey', fontWeight: '500', width: '100%', }}>{item.id}</Text>
           </View>
 
         </View>
-        <TouchableOpacity onPress={() => ModalAppoinmete(item)} style={{ height: moderateScale(50), width: '30%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', borderRadius: moderateScale(6), marginRight: moderateScale(5), marginLeft: moderateScale(4), }}>
-          <Text style={{ fontSize: scale(14.3), textAlign: 'center', color: 'white' }}>
+        <TouchableOpacity onPress={() => ModalAppoinmete(item)} style={{ height: moderateScale(50), width: '33%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', marginRight: moderateScale(3), marginLeft: moderateScale(4), }}>
+          <Text style={{ fontSize: scale(13.5), textAlign: 'center', color: 'white' }}>
             Re-Schedule
           </Text>
         </TouchableOpacity>
@@ -371,7 +370,7 @@ const DonerList = props => {
   );
   return (
     <View style={{ flex: 1 }}>
-      <DrawerHeader name={'Doner List'} image1={false} />
+      <DrawerHeader name={'Donate List'} image1={false} />
       <View style={{ flex: 1, flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(10) }}>
         {isLoading ? (<ActivityIndicator />) : (
           <FlatList

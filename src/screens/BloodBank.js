@@ -141,40 +141,30 @@ const BloodBank = props => {
           />
         </View>
         <View style={{ width: '73%', padding: scale(5), }}>
-          <Text numberOfLines={2} style={styles.cardtitle}>{item.name}</Text>
-          <Text numberOfLines={3} style={styles.cardDescription}>{item.address_1}</Text>
+          <Text numberOfLines={1} style={styles.cardtitle}>{item.name}</Text>
+          <Text numberOfLines={2} style={styles.cardDescription}>{item.address_1}</Text>
         </View>
       </View>
-      <View style={{ height: scale(50), alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row', }}>
-        <View
-          style={{
-            width: "11%",
-            height: "65%",
-            borderRadius: scale(40),
-            backgroundColor: 'white',
-            borderWidth: 2,
-            borderColor: '#DAE5F3',
-            marginRight: scale(10),
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-          <TouchableOpacity onPress={() => LatLongOpen(item)}>
-            <Image
-              source={image.google}
-              style={{
-                width: scale(20),
-                height: scale(20),
-              }}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        </View>
+      <View style={{ height: scale(40), alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row', }}>
+
+        <TouchableOpacity onPress={() => LatLongOpen(item)} style={{ height: scale(35), width: scale(45), alignItems: 'center', justifyContent: 'center', }}>
+          <Image
+            source={image.google}
+            style={{
+              tintColor: '#93121B',
+              width: scale(24),
+              height: scale(24),
+            }}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => ShareComponent(item)} style={{ height: scale(35), width: scale(45), alignItems: 'center', justifyContent: 'center', }}>
           <Image
             source={image.share}
             style={{
-              width: scale(50),
-              height: scale(50),
+              tintColor: '#93121B',
+              width: scale(24),
+              height: scale(24),
             }}
             resizeMode="contain"
           />
@@ -183,8 +173,9 @@ const BloodBank = props => {
           <Image
             source={image.phone}
             style={{
-              width: scale(30),
-              height: scale(30),
+              tintColor: '#93121B',
+              width: scale(24),
+              height: scale(24),
             }}
             resizeMode="contain"
           />
@@ -199,7 +190,7 @@ const BloodBank = props => {
       <DrawerHeader name={'Blood Banks'} />
       <ScrollView>
         <View style={{ flex: 1, flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(20), marginBottom: moderateScale(80), }}>
-          <View style={{ flexDirection: 'column', height: moderateScale(100), width: '90%', }}>
+          <View style={{ flexDirection: 'column', height: moderateScale(100), width: '90%',  }}>
             <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between', }}>
 
               <Dropdown
@@ -221,7 +212,6 @@ const BloodBank = props => {
                 value={City}
                 onFocus={() => setIsFocus1(true)}
                 onBlur={() => setIsFocus1(false)}
-
                 onChange={item => {
                   setCity(item.value);
                   console.log('map data on change City', item)
@@ -317,23 +307,22 @@ const styles = StyleSheet.create({
   },
   card: {
     elevation: 2,
-    backgroundColor: "#FFF",
     borderWidth: 0.8,
     borderColor: 'grey',
     borderRadius: moderateScale(10),
     marginBottom: moderateScale(10),
+    backgroundColor: 'white',
     // marginHorizontal:moderateScale(25),
     shadowColor: '#93121B',
     shadowRadius: 5,
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
-    height: moderateScale(185),
+    height: moderateScale(170),
     width: scale(295),
     overflow: "hidden",
   },
   textContent: {
-    height: moderateScale(130),
-    padding: 8,
+    height: moderateScale(120),
     flexDirection: 'row',
     alignItems: 'center',
   },

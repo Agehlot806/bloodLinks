@@ -207,6 +207,7 @@ const RequestBlood = () => {
 
             })
             .catch((error) => {
+                alert('Please All details fill After Submit')
                 console.error("ERROR FOUND" + error);
             })
     }
@@ -250,13 +251,22 @@ const RequestBlood = () => {
         <View style={{ flex: 1, alignItems: "center", justifyContent: 'center', backgroundColor: "white" }}>
             <DrawerHeader name={'Request for Blood'} image1={false} />
             <ProgressSteps activeStepIconBorderColor={'#93121B'}
-            completedProgressBarColor={'#93121B'}completedStepIconColor={'#93121B'}
-            activeLabelColor={'#93121B'}>
+                completedProgressBarColor={'#93121B'} completedStepIconColor={'#93121B'}
+                activeLabelColor={'#93121B'}
+            >
                 <ProgressStep
                     label="First Step"
                     onNext={onNextStep}
+
+                    nextBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    nextBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+
                     nextBtnDisabled={false}
-                    // #93121B
+                // #93121B
                 >
                     <View style={{
                         alignItems: 'center', width: '100%',
@@ -270,20 +280,9 @@ const RequestBlood = () => {
                             letterSpacing: 1,
                         }}>Patient Information </Text>
                     </View>
-                    <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: "white" }}>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10),
-                                borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Patient}
@@ -294,24 +293,14 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "space-between",
-                                marginTop: scale(12),
-                                marginBottom: scale(5),
-                                flexDirection: 'row',
-                                alignItems: 'center',
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <ModalDropdown
-                                    style={{ justifyContent: 'center', width: '80%', height: moderateScale(50), justifyContent: 'center', borderRadius: moderateScale(10), borderColor: '#ccc', borderWidth: 1, justifyContent: 'center' }}
+                                    style={{ justifyContent: 'center', width: '80%', height: moderateScale(46), justifyContent: 'center', borderRadius: moderateScale(6), borderColor: 'black', borderWidth: 0.8, justifyContent: 'center' }}
                                     onSelect={(index, value) => setAge(value)}
                                     options={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"]}
                                     defaultValue={'Select Age'}
                                     dropdownTextStyle={{ backgroundColor: '#fff', fontSize: 16, color: 'black', width: 200, alignItems: 'center' }}/*Style here*/
-                                    textStyle={{ fontSize: 16, color: 'grey', alignSelf: 'flex-start', marginLeft: 10 }}
+                                    textStyle={{ fontSize: 13, color: 'black', alignSelf: 'flex-start', marginLeft: 10 }}
                                     dropdownStyle={{ width: 150, alignItems: 'flex-start', justifyContent: 'center' }}>
                                 </ModalDropdown>
                             </View>
@@ -325,8 +314,7 @@ const RequestBlood = () => {
                                 width: "80%",
                                 marginLeft: scale(35),
                                 justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10),
+                                 borderRadius: scale(10),
                                 borderColor: "grey",
                             }}>
                                 <DropDownPicker
@@ -351,17 +339,7 @@ const RequestBlood = () => {
                             </View>
                         </View>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Registration}
@@ -372,17 +350,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Ward}
@@ -393,17 +361,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Bed}
@@ -414,17 +372,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Father}
@@ -435,17 +383,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Hospital}
@@ -456,17 +394,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={PhoneHos}
@@ -477,17 +405,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                margin: scale(8)
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={Consultant}
@@ -498,18 +416,7 @@ const RequestBlood = () => {
                             </View>
                         </KeyboardAvoidingView>
                         <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                margin: scale(8),
-                                marginTop: scale(12),
-                                justifyContent: "center",
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-
-
-                            }}>
+                            <View style={styles.inputSave}>
                                 <TextInput
                                     style={styles.input}
                                     value={PhoneConsul}
@@ -525,6 +432,21 @@ const RequestBlood = () => {
                 <ProgressStep
                     label="Second Step"
                     onNext={onNextStep2}
+                    nextBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    nextBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+                    previousBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    previousBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+                    previousBtnText={
+                        "Back"
+                    }
                 >
                     <View style={{
                         alignItems: 'center', width: '100%',
@@ -538,215 +460,173 @@ const RequestBlood = () => {
                             letterSpacing: 1,
                         }}> Clinical information </Text>
                     </View>
-                    <ScrollView style={{ flex: 1, backgroundColor: "white", marginBottom: 20, }}>
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                justifyContent: "center",
-                                marginLeft: scale(35),
-                                margin: scale(8),
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-
-                            }}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={Clinical}
-                                    onChangeText={setClinical}
-                                    placeholder='Clinical History'
-                                    placeholderTextColor={"black"}
-                                />
-                            </View>
-                        </KeyboardAvoidingView>
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                justifyContent: "center",
-                                marginLeft: scale(35),
-                                margin: scale(8),
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                            }}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={Diagnosis}
-                                    onChangeText={setDiagnosis}
-                                    placeholder='Diagnosis '
-                                    placeholderTextColor={"black"}
-                                />
-                            </View>
-                        </KeyboardAvoidingView>
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                justifyContent: "center",
-                                marginLeft: scale(35),
-                                margin: scale(8),
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                            }}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={HbGm}
-                                    onChangeText={setHbGm}
-                                    placeholder='Hb gm%  '
-                                    placeholderTextColor={"black"}
-                                />
-                            </View>
-                        </KeyboardAvoidingView>
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                justifyContent: "center",
-                                marginLeft: scale(35),
-                                margin: scale(8),
-                                marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                            }}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={Platelet}
-                                    onChangeText={setPlatelet}
-                                    placeholder='Platelet Count * '
-                                    placeholderTextColor={"black"}
-                                />
-                            </View>
-                        </KeyboardAvoidingView>
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(35),
-                                margin: scale(8),
-                                marginTop: scale(12),
-                                justifyContent: "center",
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                            }}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={Reasons}
-                                    onChangeText={setReasons}
-                                    placeholder='Resons for transation  '
-                                    placeholderTextColor={"black"}
-                                />
-                            </View>
-                        </KeyboardAvoidingView>
-
-
-
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: moderateScale(80), width: '100%', flexDirection: 'column', marginTop: scale(12),
-                                marginLeft: scale(35),
-                            }}>
-                                <Text style={{ fontSize: scale(15), color: 'black' }}>History of Previous Transfusion</Text>
-                                <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40 }}>
-                                    <RadioButton
-                                        value="yes"
-                                        color={color.red}
-                                        status={checkedA === 'yes' ? 'checked' : 'unchecked'}
-                                        onPress={() => setCheckedA('yes')}
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: "white", }}>
+                        <View>
+                            <KeyboardAvoidingView>
+                                <View style={styles.inputSave}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={Clinical}
+                                        onChangeText={setClinical}
+                                        placeholder='Clinical History'
+                                        placeholderTextColor={"black"}
                                     />
-                                    <Text style={{ fontSize: 15, }}>Yes</Text>
-
-                                    <RadioButton
-                                        value="no"
-                                        color={color.red}
-                                        status={checkedA === 'no' ? 'checked' : 'unchecked'}
-                                        onPress={() => setCheckedA('no')}
+                                </View>
+                            </KeyboardAvoidingView>
+                            <KeyboardAvoidingView>
+                                <View style={styles.inputSave}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={Diagnosis}
+                                        onChangeText={setDiagnosis}
+                                        placeholder='Diagnosis '
+                                        placeholderTextColor={"black"}
                                     />
-                                    <Text style={{ fontSize: 15, }}>No</Text>
+                                </View>
+                            </KeyboardAvoidingView>
+                            <KeyboardAvoidingView>
+                                <View style={styles.inputSave}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={HbGm}
+                                        onChangeText={setHbGm}
+                                        placeholder='Hb gm%  '
+                                        placeholderTextColor={"black"}
+                                    />
+                                </View>
+                            </KeyboardAvoidingView>
+                            <KeyboardAvoidingView>
+                                <View style={styles.inputSave}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={Platelet}
+                                        onChangeText={setPlatelet}
+                                        placeholder='Platelet Count * '
+                                        placeholderTextColor={"black"}
+                                    />
+                                </View>
+                            </KeyboardAvoidingView>
+                            <KeyboardAvoidingView>
+                                <View style={styles.inputSave}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={Reasons}
+                                        onChangeText={setReasons}
+                                        placeholder='Resons for transation  '
+                                        placeholderTextColor={"black"}
+                                    />
+                                </View>
+                            </KeyboardAvoidingView>
 
+
+
+                            <KeyboardAvoidingView>
+                                <View style={{
+                                    height: moderateScale(80), width: '100%', flexDirection: 'column', marginTop: scale(12),
+                                    marginLeft: scale(35),
+                                }}>
+                                    <Text style={{ fontSize: scale(15), color: 'black' }}>History of Previous Transfusion</Text>
+                                    <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40 }}>
+                                        <RadioButton
+                                            value="yes"
+                                            color={color.red}
+                                            status={checkedA === 'yes' ? 'checked' : 'unchecked'}
+                                            onPress={() => setCheckedA('yes')}
+                                        />
+                                        <Text style={{ fontSize: 15, }}>Yes</Text>
+
+                                        <RadioButton
+                                            value="no"
+                                            color={color.red}
+                                            status={checkedA === 'no' ? 'checked' : 'unchecked'}
+                                            onPress={() => setCheckedA('no')}
+                                        />
+                                        <Text style={{ fontSize: 15, }}>No</Text>
+
+                                    </View>
+                                </View>
+                            </KeyboardAvoidingView>
+                            <KeyboardAvoidingView>
+                                <View style={styles.inputSave}>
+                                    <TextInput
+                                        style={styles.input}
+                                        value={InCase}
+                                        onChangeText={setInCase}
+                                        placeholder='In case of Female(History of obstetric)'
+                                        placeholderTextColor={"black"}
+                                    />
+                                </View>
+                            </KeyboardAvoidingView>
+                            <View style={{
+                                height: scale(50), flexDirection: "column", width: "100%", marginTop: scale(5), marginBottom: scale(100)
+                            }}>
+
+                                <View style={{
+                                    zIndex: 5,
+                                    width: "80%",
+                                    marginLeft: scale(35),
+                                    justifyContent: "center",
+                                    marginTop: scale(12),
+                                    borderRadius: scale(10),
+                                    borderColor: "grey",
+                                }}>
+                                    <DropDownPicker
+                                        dropDownDirection="BOTTOM"
+                                        value={value2}
+                                        open={open2}
+                                        setOpen={setopen2}
+                                        setValue={setValue2}
+                                        setItems={setItems2}
+                                        searchable={true}
+                                        maxHeight={100}
+                                        searchPlaceholder="Search Blood Group..."
+                                        placeholder="--Blood Group--"
+                                        // onOpen={Close8}
+                                        items={[
+                                            { label: 'A+', value: '1' },
+                                            { label: 'A-', value: '2' },
+                                            { label: 'AB+', value: '3' },
+                                            { label: 'AB-', value: '4' },
+                                            { label: 'B+', value: '5' },
+                                            { label: 'B-', value: '6' },
+                                            { label: 'O+', value: '7' },
+                                            { label: 'O-', value: '8' },
+                                        ]}
+                                        // onChangeValue={(item) => {
+                                        //   changeBlood(item)
+                                        //   console.log('item--',items)
+                                        // }}
+                                        zIndex={1000}
+                                        zIndexInverse={2000}
+                                        containerStyle={{
+
+                                            borderColor: "blue", position: 'relative', bottom: scale(3), height: scale(50), borderRadius: scale(10),
+
+                                        }}
+                                    />
                                 </View>
                             </View>
-                        </KeyboardAvoidingView>
-
-                        <View style={{
-                            height: scale(50), flexDirection: "row", width: "100%", marginTop: scale(12),
-                        }}>
-
-                            <View style={{
-                                zIndex: 5,
-                                width: "79%",
-                                marginLeft: scale(33),
-                                justifyContent: "center",
-                                marginTop: scale(12),
-                                borderRadius: scale(10),
-                                borderColor: "grey",
-                            }}>
-                                <DropDownPicker
-                                    dropDownDirection="BOTTOM"
-                                    value={value2}
-                                    open={open2}
-                                    setOpen={setopen2}
-                                    setValue={setValue2}
-                                    setItems={setItems2}
-                                    searchable={true}
-                                    maxHeight={100}
-                                    searchPlaceholder="Search Blood Group..."
-                                    placeholder="--Blood Group--"
-                                    // onOpen={Close8}
-                                    items={[
-                                        { label: 'A+', value: '1' },
-                                        { label: 'A-', value: '2' },
-                                        { label: 'AB+', value: '3' },
-                                        { label: 'AB-', value: '4' },
-                                        { label: 'B+', value: '5' },
-                                        { label: 'B-', value: '6' },
-                                        { label: 'O+', value: '7' },
-                                        { label: 'O-', value: '8' },
-                                    ]}
-                                    // onChangeValue={(item) => {
-                                    //   changeBlood(item)
-                                    //   console.log('item--',items)
-                                    // }}
-                                    zIndex={1000}
-                                    zIndexInverse={2000}
-                                    containerStyle={{
-
-                                        borderColor: "blue", position: 'relative', bottom: scale(3), height: scale(50), borderRadius: scale(10),
-
-                                    }}
-                                />
-                            </View>
                         </View>
-
-
-                        <KeyboardAvoidingView>
-                            <View style={{
-                                height: scale(48),
-                                width: "80%",
-                                marginLeft: scale(29),
-                                justifyContent: "center",
-                                marginTop: scale(15),
-                                borderRadius: scale(10), borderWidth: 0.8,
-                                borderColor: "grey",
-                                marginBottom: 70,
-
-                            }}>
-                                <TextInput
-                                    style={styles.input}
-                                    value={InCase}
-                                    onChangeText={setInCase}
-                                    placeholder='In case of Female(History of obstetric)'
-                                    placeholderTextColor={"black"}
-                                />
-                            </View>
-                        </KeyboardAvoidingView>
                     </ScrollView>
                 </ProgressStep>
                 <ProgressStep
                     label="Third Step"
                     onNext={onNextStep3}
+                    nextBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    nextBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+                    previousBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    previousBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+                    previousBtnText={
+                        "Back"
+                    }
                 >
                     <View style={{
                         alignItems: 'center', width: '100%',
@@ -760,45 +640,16 @@ const RequestBlood = () => {
                             letterSpacing: 1,
                         }}>Blood component Requested</Text>
                     </View>
-                    <ScrollView style={{ flex: 1, backgroundColor: "white", marginBottom: 20, }}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: "white", marginBottom: 20, }}>
                         <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'flex-start',
-                                flexDirection: 'column',
-                                width: moderateScale(350),
-                                height: moderateScale(180),
-                                backgroundColor: 'white',
-                                shadowColor: 'grey',
-                                borderWidth: 0.8,
-                                borderColor: 'grey',
-                                borderRadius: moderateScale(10),
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.5,
-                                elevation: 3,
-                                marginTop: moderateScale(10),
-                                marginBottom: moderateScale(10),
-                                marginHorizontal: 10,
-                            }}>
+                            style={styles.modal}>
                             <View style={{ height: 30, width: '100%', marginLeft: scale(15), alignItems: 'flex-start', justifyContent: 'center' }}>
-                                <Text style={{
-                                    color: 'black',
-                                    textTransform: 'lowercase',
-                                    fontWeight: '400',
-                                    fontSize: scale(15),
-                                    letterSpacing: 1,
-                                }}>Components Name</Text>
+                                <Text style={styles.componentName}>Components Name</Text>
                             </View>
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '80%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        textTransform: 'lowercase',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                        letterSpacing: 1,
-                                    }}>Whole Bloode</Text>
+                                    <Text style={styles.nameText}>Whole Bloode</Text>
                                 </View>
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center', height: 30, }}>
                                     <Checkbox
@@ -813,11 +664,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>No.of Units Requested</Text>
+                                    <Text style={styles.nameText}>No.of Units Requested</Text>
                                 </View>
                                 {isSelected ? (
                                     <View style={{ width: '40%', backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center', height: 40, borderRadius: 10, }}>
@@ -836,11 +683,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>NAT Tested Product</Text>
+                                    <Text style={styles.nameText}>NAT Tested Product</Text>
                                 </View>
                                 {isSelected ? (
                                     <View style={{ width: '40%', alignItems: 'center', justifyContent: 'center', height: 30, flexDirection: 'row' }}>
@@ -868,43 +711,14 @@ const RequestBlood = () => {
                         </View>
                         {/* 2 */}
                         <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'flex-start',
-                                flexDirection: 'column',
-                                width: moderateScale(350),
-                                height: moderateScale(180),
-                                backgroundColor: 'white',
-                                shadowColor: 'grey',
-                                borderWidth: 0.8,
-                                borderColor: 'grey',
-                                borderRadius: moderateScale(10),
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.5,
-                                elevation: 3,
-                                marginTop: moderateScale(10),
-                                marginBottom: moderateScale(10),
-                                marginHorizontal: 10,
-                            }}>
+                            style={styles.modal}>
                             <View style={{ height: 30, width: '100%', marginLeft: scale(15), alignItems: 'flex-start', justifyContent: 'center' }}>
-                                <Text style={{
-                                    color: 'black',
-                                    textTransform: 'lowercase',
-                                    fontWeight: '400',
-                                    fontSize: scale(15),
-                                    letterSpacing: 1,
-                                }}>Components Name</Text>
+                                <Text style={styles.componentName}>Components Name</Text>
                             </View>
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '80%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        textTransform: 'lowercase',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                        letterSpacing: 1,
-                                    }}>Cryo Poor Plasma</Text>
+                                    <Text style={styles.nameText}>Cryo Poor Plasma</Text>
                                 </View>
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center', height: 30, }}>
                                     <Checkbox
@@ -919,11 +733,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>No.of Units Requested</Text>
+                                    <Text style={styles.nameText}>No.of Units Requested</Text>
                                 </View>
                                 {isSelected2 ? (
                                     <View style={{ width: '40%', backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center', height: 40, borderRadius: 10, }}>
@@ -942,11 +752,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>NAT Tested Product</Text>
+                                    <Text style={styles.nameText}>NAT Tested Product</Text>
                                 </View>
                                 {isSelected2 ? (
                                     <View style={{ width: '40%', alignItems: 'center', justifyContent: 'center', height: 30, flexDirection: 'row' }}>
@@ -974,43 +780,14 @@ const RequestBlood = () => {
                         </View>
                         {/* 3 */}
                         <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'flex-start',
-                                flexDirection: 'column',
-                                width: moderateScale(350),
-                                height: moderateScale(180),
-                                backgroundColor: 'white',
-                                shadowColor: 'grey',
-                                borderWidth: 0.8,
-                                borderColor: 'grey',
-                                borderRadius: moderateScale(10),
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.5,
-                                elevation: 3,
-                                marginTop: moderateScale(10),
-                                marginBottom: moderateScale(10),
-                                marginHorizontal: 10,
-                            }}>
+                            style={styles.modal}>
                             <View style={{ height: 30, width: '100%', marginLeft: scale(15), alignItems: 'flex-start', justifyContent: 'center' }}>
-                                <Text style={{
-                                    color: 'black',
-                                    textTransform: 'lowercase',
-                                    fontWeight: '400',
-                                    fontSize: scale(15),
-                                    letterSpacing: 1,
-                                }}>Components Name</Text>
+                                <Text style={styles.componentName}>Components Name</Text>
                             </View>
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '80%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        textTransform: 'lowercase',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                        letterSpacing: 1,
-                                    }}>Cryoprecipitate</Text>
+                                    <Text style={styles.nameText}>Cryoprecipitate</Text>
                                 </View>
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center', height: 30, }}>
                                     <Checkbox
@@ -1025,11 +802,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>No.of Units Requested</Text>
+                                    <Text style={styles.nameText}>No.of Units Requested</Text>
                                 </View>
                                 {isSelected3 ? (
                                     <View style={{ width: '40%', backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center', height: 40, borderRadius: 10, }}>
@@ -1049,11 +822,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>NAT Tested Product</Text>
+                                    <Text style={styles.nameText}>NAT Tested Product</Text>
                                 </View>
                                 {isSelected3 ? (
                                     <View style={{ width: '40%', alignItems: 'center', justifyContent: 'center', height: 30, flexDirection: 'row' }}>
@@ -1082,43 +851,14 @@ const RequestBlood = () => {
 
                         {/* 4 */}
                         <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'flex-start',
-                                flexDirection: 'column',
-                                width: moderateScale(350),
-                                height: moderateScale(180),
-                                backgroundColor: 'white',
-                                shadowColor: 'grey',
-                                borderWidth: 0.8,
-                                borderColor: 'grey',
-                                borderRadius: moderateScale(10),
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.5,
-                                elevation: 3,
-                                marginTop: moderateScale(10),
-                                marginBottom: moderateScale(10),
-                                marginHorizontal: 10,
-                            }}>
+                            style={styles.modal}>
                             <View style={{ height: 30, width: '100%', marginLeft: scale(15), alignItems: 'flex-start', justifyContent: 'center' }}>
-                                <Text style={{
-                                    color: 'black',
-                                    textTransform: 'lowercase',
-                                    fontWeight: '400',
-                                    fontSize: scale(15),
-                                    letterSpacing: 1,
-                                }}>Components Name</Text>
+                                <Text style={styles.componentName}>Components Name</Text>
                             </View>
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '80%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        textTransform: 'lowercase',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                        letterSpacing: 1,
-                                    }}>Fresh Frozen Plasma</Text>
+                                    <Text style={styles.nameText}>Fresh Frozen Plasma</Text>
                                 </View>
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center', height: 30, }}>
                                     <Checkbox
@@ -1133,11 +873,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>No.of Units Requested</Text>
+                                    <Text style={styles.nameText}>No.of Units Requested</Text>
                                 </View>
                                 {isSelected4 ? (
                                     <View style={{ width: '40%', backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center', height: 40, borderRadius: 10, }}>
@@ -1157,11 +893,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>NAT Tested Product</Text>
+                                    <Text style={styles.nameText}>NAT Tested Product</Text>
                                 </View>
                                 {isSelected4 ? (
                                     <View style={{ width: '40%', alignItems: 'center', justifyContent: 'center', height: 30, flexDirection: 'row' }}>
@@ -1190,43 +922,14 @@ const RequestBlood = () => {
 
                         {/* 5 */}
                         <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'flex-start',
-                                flexDirection: 'column',
-                                width: moderateScale(350),
-                                height: moderateScale(180),
-                                backgroundColor: 'white',
-                                shadowColor: 'grey',
-                                borderWidth: 0.8,
-                                borderColor: 'grey',
-                                borderRadius: moderateScale(10),
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.5,
-                                elevation: 3,
-                                marginTop: moderateScale(10),
-                                marginBottom: moderateScale(10),
-                                marginHorizontal: 10,
-                            }}>
+                            style={styles.modal}>
                             <View style={{ height: 30, width: '100%', marginLeft: scale(15), alignItems: 'flex-start', justifyContent: 'center' }}>
-                                <Text style={{
-                                    color: 'black',
-                                    textTransform: 'lowercase',
-                                    fontWeight: '400',
-                                    fontSize: scale(15),
-                                    letterSpacing: 1,
-                                }}>Components Name</Text>
+                                <Text style={styles.componentName}>Components Name</Text>
                             </View>
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '80%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        textTransform: 'lowercase',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                        letterSpacing: 1,
-                                    }}>Red blood cell</Text>
+                                    <Text style={styles.nameText}>Red blood cell</Text>
                                 </View>
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center', height: 30, }}>
                                     <Checkbox
@@ -1241,11 +944,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>No.of Units Requested</Text>
+                                    <Text style={styles.nameText}>No.of Units Requested</Text>
                                 </View>
                                 {isSelected5 ? (
                                     <View style={{ width: '40%', backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center', height: 40, borderRadius: 10, }}>
@@ -1265,11 +964,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>NAT Tested Product</Text>
+                                    <Text style={styles.nameText}>NAT Tested Product</Text>
                                 </View>
                                 {isSelected5 ? (
                                     <View style={{ width: '40%', alignItems: 'center', justifyContent: 'center', height: 30, flexDirection: 'row' }}>
@@ -1298,43 +993,14 @@ const RequestBlood = () => {
                         {/* 6 */}
 
                         <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'flex-start',
-                                flexDirection: 'column',
-                                width: moderateScale(350),
-                                height: moderateScale(180),
-                                backgroundColor: 'white',
-                                shadowColor: 'grey',
-                                borderWidth: 0.8,
-                                borderColor: 'grey',
-                                borderRadius: moderateScale(10),
-                                shadowOffset: { width: 0, height: 2 },
-                                shadowOpacity: 0.5,
-                                elevation: 3,
-                                marginTop: moderateScale(10),
-                                marginBottom: moderateScale(10),
-                                marginHorizontal: 10,
-                            }}>
+                            style={styles.modal}>
                             <View style={{ height: 30, width: '100%', marginLeft: scale(15), alignItems: 'flex-start', justifyContent: 'center' }}>
-                                <Text style={{
-                                    color: 'black',
-                                    textTransform: 'lowercase',
-                                    fontWeight: '400',
-                                    fontSize: scale(15),
-                                    letterSpacing: 1,
-                                }}>Components Name</Text>
+                                <Text style={styles.componentName}>Components Name</Text>
                             </View>
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '80%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        textTransform: 'lowercase',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                        letterSpacing: 1,
-                                    }}>Platelet rich concentrate</Text>
+                                    <Text style={styles.nameText}>Platelet rich concentrate</Text>
                                 </View>
                                 <View style={{ width: '20%', alignItems: 'center', justifyContent: 'center', height: 30, }}>
                                     <Checkbox
@@ -1349,11 +1015,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>No.of Units Requested</Text>
+                                    <Text style={styles.nameText}>No.of Units Requested</Text>
                                 </View>
                                 {isSelected6 ? (
                                     <View style={{ width: '40%', backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center', height: 40, borderRadius: 10, }}>
@@ -1372,11 +1034,7 @@ const RequestBlood = () => {
                             <View style={{ height: 50, width: '90%', marginLeft: scale(10), alignItems: 'center', justifyContent: 'flex-start', flexDirection: 'row' }}>
 
                                 <View style={{ width: '60%', }}>
-                                    <Text style={{
-                                        color: 'black',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>NAT Tested Product</Text>
+                                    <Text style={styles.nameText}>NAT Tested Product</Text>
                                 </View>
                                 {isSelected6 ? (
                                     <View style={{ width: '40%', alignItems: 'center', justifyContent: 'center', height: 30, flexDirection: 'row' }}>
@@ -1407,6 +1065,21 @@ const RequestBlood = () => {
                 </ProgressStep>
                 <ProgressStep label="Fourth Step"
                     onSubmit={onNextStep4}
+                    nextBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    nextBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+                    previousBtnStyle={{
+                        height: moderateScale(50), width: scale(110), flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#bb3039', borderRadius: moderateScale(10),
+                    }}
+                    previousBtnTextStyle={{
+                        fontSize: 16, textAlign: 'center', color: 'white'
+                    }}
+                    previousBtnText={
+                        "Back"
+                    }
                 >
                     <View style={{
                         alignItems: 'center', width: '100%',
@@ -1418,7 +1091,7 @@ const RequestBlood = () => {
                             fontSize: scale(15),
                         }}>Product Requirement</Text>
                     </View>
-                    <ScrollView style={{ flex: 1, backgroundColor: "white", marginBottom: 20, }}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1, backgroundColor: "white", marginBottom: 20, }}>
 
                         <View style={{
                             height: scale(20),
@@ -1436,29 +1109,32 @@ const RequestBlood = () => {
                         </View>
                         <KeyboardAvoidingView>
                             <View style={{
-                                height: scale(48),
                                 width: "80%",
                                 justifyContent: "flex-start",
                                 alignItems: 'center',
                                 marginLeft: scale(35),
                                 marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 1,
-                                borderColor: "grey",
-                                flexDirection: 'row'
+                                flexDirection: 'row',
+                                height: 50,
+                                borderWidth: 0.8,
+                                borderColor: 'black',
+                                borderRadius: 6,
+                                padding: scale(8),
+
                             }}>
                                 <View style={{
                                     height: scale(40),
                                     width: "70%",
                                     justifyContent: "flex-start",
-                                    paddingLeft: scale(10),
+                                    paddingLeft: scale(8),
                                     alignItems: 'center',
                                     flexDirection: 'row',
                                 }}>
                                     <Text style={{
-                                        color: 'grey',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
-                                    }}>{date1}</Text>
+                                        color: 'black',
+                                        fontWeight: '300',
+                                        fontSize: scale(12.5),
+                                    }}>{date1} </Text>
                                 </View>
                                 <DateTimePickerModal
                                     isVisible={pickerMode !== null}
@@ -1504,28 +1180,30 @@ const RequestBlood = () => {
                         </View>
                         <KeyboardAvoidingView>
                             <View style={{
-                                height: scale(48),
                                 width: "80%",
                                 justifyContent: "flex-start",
                                 alignItems: 'center',
                                 marginLeft: scale(35),
                                 marginTop: scale(12),
-                                borderRadius: scale(10), borderWidth: 1,
-                                borderColor: "grey",
-                                flexDirection: 'row'
+                                flexDirection: 'row',
+                                height: 50,
+                                borderWidth: 0.8,
+                                borderColor: 'black',
+                                borderRadius: 6,
+                                padding: scale(8),
                             }}>
                                 <View style={{
                                     height: scale(40),
                                     width: "70%",
                                     justifyContent: "flex-start",
-                                    paddingLeft: scale(10),
+                                    paddingLeft: scale(8),
                                     alignItems: 'center',
                                     flexDirection: 'row',
                                 }}>
                                     <Text style={{
-                                        color: 'grey',
-                                        fontWeight: '400',
-                                        fontSize: scale(15),
+                                        color: 'black',
+                                        fontWeight: '300',
+                                        fontSize: scale(12.5),
                                     }}>{time}</Text>
                                 </View>
                                 <DateTimePickerModal
@@ -1703,7 +1381,6 @@ const RequestBlood = () => {
                         </View>
                     </ScrollView>
                 </ProgressStep>
-
             </ProgressSteps>
         </View>
     )
@@ -1714,22 +1391,52 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     input: {
-        height: 55,
-        marginVertical: 5,
-        borderWidth: 1.5,
-        borderColor: 'gray',
-        borderRadius: 9,
-        fontSize: 15,
-        fontWeight: '400',
+        height: 50,
+        // marginVertical: 5,
+        borderWidth: 0.8,
+        borderColor: 'black',
+        borderRadius: 6,
+        fontSize: 13,
+        fontWeight: '300',
+        padding: scale(8),
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: 'white',
-        shadowborder: 1,
-        paddingLeft: scale(15), fontSize: scale(15),
-        shadowOffset: { width: 1, height: 1 },
-        shadowOpacity: 0.1,
-        elevation: 2,
-        color: 'black'
+        // shadowColor: 'white'        
+    },
+    inputSave: {
+        height: scale(48),
+        width: "80%",
+        marginLeft: scale(35),
+        justifyContent: "center",
+        margin: scale(5)
+    },
+    modal: {
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+        width: moderateScale(350),
+        height: moderateScale(180),
+        backgroundColor: 'white',
+        shadowColor: 'grey',
+        borderWidth: 0.8,
+        borderColor: 'grey',
+        borderRadius: moderateScale(10),
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        elevation: 3,
+        marginTop: moderateScale(10),
+        marginBottom: moderateScale(10),
+        marginHorizontal: 10,
+    },
+    componentName: {
+        color: 'black',
+        fontWeight: '400',
+        fontSize: scale(15),
+    },
+    nameText: {
+        color: 'black',
+        fontWeight: '300',
+        fontSize: scale(13),
     },
 });
 export default RequestBlood;

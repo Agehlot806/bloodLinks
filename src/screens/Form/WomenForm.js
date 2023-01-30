@@ -116,8 +116,8 @@ const WomenForm = () => {
             <ScrollView>
                 <View style={{ alignItems: 'center', width: '100%', justifyContent: 'center' }}>
                     <View style={{ alignItems: 'center', height: 'auto', width: '100%', marginBottom: moderateScale(159) }}>
-                        <Text style={{ fontSize: 20, }}>REQUEST FOR BLOOD DONATION</Text>
-                        <View style={{ height: moderateScale(30), width: '95%', flexDirection: 'column' }}>
+                        <Text style={{ fontSize: 20,fontWeight:'200',top:scale(5),color:'black' }}>REQUEST FOR BLOOD DONATION</Text>
+                        <View style={{ height: moderateScale(30), width: '95%', flexDirection: 'column',margin:scale(7)}}>
                             <Text style={{ fontSize: scale(16.5), color: COLORS.red }}>Physiological Status for Women:</Text>
                         </View>
                         <View style={{ height: moderateScale(90), width: '95%', flexDirection: 'column' }}>

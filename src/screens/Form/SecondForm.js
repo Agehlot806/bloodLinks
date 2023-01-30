@@ -33,7 +33,7 @@ const SecondForm = () => {
       setChecked1('no')
       setModalVisible(true)
       settextString('Practice safe sex')
-     } else {
+    } else {
       setModalVisible(false)
       setChecked1('yes')
       setChecked2('no')
@@ -44,7 +44,7 @@ const SecondForm = () => {
       setCheckedB1('no')
       setCheckedC1('no')
       setCheckedD1('yes')
-     }
+    }
   }
   const [isActive, setIsActive] = useState(true);
   const [TextHide, setTextHide] = useState(true);
@@ -111,15 +111,15 @@ const SecondForm = () => {
       setCheckedD1('no')
       setModalVisible(true)
       settextString('Considering blood is not safe for transfusion to patient')
-     }
+    }
   }
 
   const Patientyes = (value) => {
     if (value == 'yes') {
       setCheckedD1('yes')
-     } else {
+    } else {
       setCheckedD1('none')
-     }
+    }
   }
   const firstFormApi = async () => {
     const IdUser = await AsyncStorage.getItem('User')
@@ -159,7 +159,7 @@ const SecondForm = () => {
         console.log('RESPONSE apiiii second-------------->>>>', Response)
         // console.log(' second Id-------------->>>>', WomenId)
         if (Response.status == true) {
-          alert('Secand Form successfully submit !')
+          alert('Second Form successfully submit !')
           navigation.navigate('ThirdForm')
         } else {
           alert('First Form fail !')
@@ -172,17 +172,18 @@ const SecondForm = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: "column", }}>
       <DrawerHeader name={'Blood Donation'} image1={false} />
-      <View style={{ height: moderateScale(35), width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-end', paddingRight: moderateScale(10), }}>
-        <Text style={{ fontSize: scale(18) }}>
+
+      <View style={{ height: moderateScale(35), width: '100%', alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-start', paddingLeft: moderateScale(10), backgroundColor: 'black' }}>
+        <Text style={{ fontSize: scale(18), color: 'white' }}>
           Step 2
         </Text>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ alignItems: 'center', width: '100%', justifyContent: 'center' }}>
           <View style={{ alignItems: 'center', height: 'auto', width: '100%', marginBottom: moderateScale(159) }}>
-            <Text style={{ fontSize: 20, }}>REQUEST FOR BLOOD DONATION</Text>
+            <Text style={{ fontSize: 20,fontWeight:'200',top:scale(5),color:'black' }}>REQUEST FOR BLOOD DONATION</Text>
 
-            <View style={{ height: moderateScale(80), width: '95%', flexDirection: 'column' }}>
+            <View style={{ height: moderateScale(80), width: '95%', flexDirection: 'column',margin:scale(7)  }}>
               <Text style={{ fontSize: scale(15), color: 'black' }}>1.  Do You Practice Safe Sex ?</Text>
               <View style={{ height: moderateScale(55), width: '100%', flexDirection: 'row', alignItems: 'center', paddingLeft: 40 }}>
                 <RadioButton

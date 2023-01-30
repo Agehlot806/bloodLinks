@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
-  TouchableOpacity,
+  TouchableOpacity, BackHandler, Alert
 } from 'react-native';
 import StatusTopBar from '../Components/StatusTopBar';
 import { useNavigation, DrawerActions, useFocusEffect } from '@react-navigation/native';
@@ -20,53 +20,66 @@ const { width, height } = Dimensions.get('window');
 
 const HOME = ({ route }) => {
   const navigation = useNavigation();
-  const [hospitalboollist, sethospitalboollist] = useState([]);
-  const [ajaxRequesting, setAjaxRequesting] = useState(true);
   const data = [
-    {
-      pic: image.Page1,
-    },
-    {
-      pic: image.Page2,
-    },
-    {
-      pic: image.Page3,
-    },
-    {
-      pic: image.Page4,
-    },
-    {
-      pic: image.Page5,
-    },
+    { pic: image.Page1 },
+    { pic: image.Page2 },
+    { pic: image.Page3 },
   ];
   const data1 = [
-
-    {
-      pic: image.Page2,
-    },
-    {
-      pic: image.Page1,
-    },
-    {
-      pic: image.Page4,
-    },
-    {
-      pic: image.Page3,
-    },
-    {
-      pic: image.Page5,
-    },
+    { pic: image.Page3 },
+    { pic: image.Page2 },
+    { pic: image.Page1 },
   ];
+  const LoginUserId = async () => {
+    console.log('hello user id home param', route.params.user)
+    const item = (route.params.user);
+    try {
+      await AsyncStorage.setItem('User', item)
+    } catch (e) {
+      // console.log("SetItem error idd", e)
+    }
+  }
   const [name, setname] = useState();
   const [Lastname, setLastname] = useState();
   const IdFunct = async () => {
     const IdUser = await AsyncStorage.getItem('User')
-    console.log('hospital list', IdUser)
+    const IdUse = await AsyncStorage.getItem('User1')
+    console.log('user iddddd helloo check', IdUser)
+    console.log('user1 iddddd helloo check', IdUse)
+    if (IdUser == null) {
+      LoginUserId()
+    } else {
+      console.log('user helooo check else', IdUser)
+      console.log('user1 helooo check else', IdUse)
+    }
+  }
+  const Gender = async () => {
+    const IdUser = await AsyncStorage.getItem('User')
+    const IdUse = await AsyncStorage.getItem('User1')
+    console.log('userId ------------>>>async', IdUser)
+    console.log('userId1 ------------>>>async', IdUse)
   }
   useEffect(() => {
     IdFunct()
     Gender()
+    const backAction = () => {
+      Alert.alert("BloodLink Application", "Are you sure you want to exit ?", [
+        {
+          text: "NO",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
   }, []);
+
 
   const _renderItem = ({ item, index }) => {
     return (
@@ -75,31 +88,30 @@ const HOME = ({ route }) => {
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'row',
-          width: moderateScale(360),
-          height: moderateScale(180),
+          width: scale(330),
+          height: moderateScale(179),
           marginHorizontal: scale(10),
           backgroundColor: 'white',
           shadowColor: 'grey',
           borderWidth: scale(2),
           borderColor: '#93121B',
-          borderRadius: moderateScale(10),
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.5,
           elevation: 3,
-          marginTop: moderateScale(10),
+          marginTop: moderateScale(12),
         }}>
         <Image
-          style={{ height: scale(160), width: '97%' }}
+          style={{ height: scale(164), width: '100%' }}
           resizeMode={'contain'}
           source={item.pic}
         />
-
       </View>
     );
   }
   useFocusEffect(
     React.useCallback(() => {
       setTimeout(() => {
+        IdFunct()
         Gender()
         ProfileDta()
       }, 10)
@@ -107,7 +119,6 @@ const HOME = ({ route }) => {
   );
   const ProfileDta = async () => {
     const IdUser = await AsyncStorage.getItem('User')
-
     let url = `https://bloodlinks.in/myprofile_data`   //API to 
     var headers = {
       'Accept': 'application/json',
@@ -130,13 +141,11 @@ const HOME = ({ route }) => {
         setLastname(Response[0].last_name)
       })
       .catch((error) => {
+        alert("Network Server Error");
         console.error("ERROR FOUND" + error);
       })
   }
-  const Gender = async () => {
-    const IdUser = await AsyncStorage.getItem('User')
-    console.log('userId ------------>>>async', IdUser)
-  }
+
   const HeaderHome = () => {
     return (
       <View style={styles.homeHeader}>
@@ -155,7 +164,7 @@ const HOME = ({ route }) => {
               />
             </View>
             <View style={{ height: scale(40), width: scale(210), alignItems: 'flex-start', justifyContent: 'center', paddingLeft: scale(7), }}>
-              <Text style={{ color: 'white', fontSize: scale(13), fontWeight: '600', width: scale(210), }}>Welcome {name}{Lastname}</Text>
+              <Text style={{ color: 'white', fontSize: scale(13), fontWeight: '600', width: scale(210), }}>Welcome {name}{''}{Lastname}</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -176,8 +185,8 @@ const HOME = ({ route }) => {
     <View style={styles.container}>
       <StatusTopBar />
       <HeaderHome />
-      <ScrollView >
-        <View style={{ height: scale(180), alignItems: 'center', justifyContent: 'center' }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ height: scale(180), alignItems: 'center', justifyContent: 'center', width: '100%' }}>
           <SwiperFlatList
             autoplay
             autoplayDelay={3}
@@ -187,7 +196,7 @@ const HOME = ({ route }) => {
             renderItem={_renderItem}
           />
         </View>
-        <View style={{ height: moderateScale(170), flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(7), backgroundColor:'#f4f4f4',marginHorizontal:scale(2) }}>
+        <View style={{ height: moderateScale(170), flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', marginTop: moderateScale(7), backgroundColor: '#f4f4f4', marginHorizontal: scale(2) }}>
           <TouchableOpacity onPress={() => navigation.navigate('BloodBank')} style={{
             height: moderateScale(145),
             width: '31%',
@@ -283,21 +292,21 @@ const HOME = ({ route }) => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{ justifyContent: 'center', paddingHorizontal: 30 }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <TouchableOpacity
             style={styles.headerBtn}
             onPress={() => navigation.navigate('FirstForm')}>
-            <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '600', textAlign: 'center',width:'100%' }}>DONATE BLOOD</Text>
+            <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '600', textAlign: 'center', width: '100%' }}>DONATE BLOOD</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ justifyContent: 'center', paddingHorizontal: 30, marginTop: 10 }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: moderateScale(10), width: '100%' }}>
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: 'black' }]}
             onPress={() => navigation.navigate('RequestBlood')}>
-            <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '600', textAlign: 'center',width:'100%' }}>REQUEST BLOOD</Text>
+            <Text style={{ color: 'white', fontSize: scale(15), fontWeight: '600', textAlign: 'center', width: '100%' }}>REQUEST BLOOD</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ height: scale(260), alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ height: scale(260), alignItems: 'center', justifyContent: 'center', width: '100%', marginLeft: scale(3) }}>
           <SwiperFlatList
             autoplay
             autoplayDelay={3}
@@ -337,6 +346,7 @@ const styles = StyleSheet.create({
     height: moderateScale(50),
     backgroundColor: '#b31d27',
     justifyContent: 'center',
+    width: '90%',
     alignItems: 'center',
   },
   container: { flex: 1, backgroundColor: 'white', },

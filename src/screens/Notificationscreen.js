@@ -29,7 +29,7 @@ const Notificationscreen = ({ route }) => {
       }}>
         <View
           style={styles.headerBtn}>
-          <Text style={{ color: 'black', fontSize: scale(14), fontWeight: '500', width: scale(300), }}>Welcome to BloodLink {route.params.paramKey} </Text>
+          <Text style={{ color: 'black', fontSize: scale(14), fontWeight: '500', width: scale(300), }}>Welcome to BloodLinks {route.params.paramKey} </Text>
         </View>
       </View>
     </ScrollView>

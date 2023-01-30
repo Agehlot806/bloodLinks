@@ -12,7 +12,7 @@ import {
 import { COLOR } from '../constants/colorConstants';
 import { TextInput } from 'react-native-gesture-handler';
 import DrawerHeader from '../Components/DrawerHeader';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { moderateScale, scale } from 'react-native-size-matters';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const { width, height } = Dimensions.get('window');
@@ -21,14 +21,30 @@ const OtpSinup = ({ route }) => {
     const [pin1, setpin1] = useState();
     const inputRefOne = useRef();
 
+
+
+    const Testt = async () => {
+        const IDD = await AsyncStorage.getItem('User')
+        const IDD1 = await AsyncStorage.getItem('User1')
+        console.log('heeloe test', IDD1)
+        console.log('heeloe id save testt', IDD)
+    }
+    useEffect(() => {
+        Testt
+    }, []);
+
+
     const LoginUserId = async (city) => {
-        console.log('hello user id sinup', city)
+        const IDDD = JSON.stringify(city)
+        console.log('hello user id sinup save check useEffect', IDDD)
         try {
-            await AsyncStorage.setItem('User', city)
+            await AsyncStorage.setItem('User', IDDD)
+            await AsyncStorage.setItem('User1', IDDD)
         } catch (e) {
             // saving error
         }
     }
+
 
     const OtpVerify = () => {
         let url = `https://bloodlinks.in/verificationsignup`
@@ -37,7 +53,7 @@ const OtpSinup = ({ route }) => {
             'Content-Type': 'application/json',
         };
         let data = {
-            cust_mobile: route.params.Number,
+            cust_mobile: route.params.num,
             cust_otp: pin1,
             // data: route.params.deta,
         }
@@ -56,15 +72,14 @@ const OtpSinup = ({ route }) => {
             .then((Response) => Response.json())
             .then((Response) => {
                 console.log('RESPONSE apiiii otp verfiy sinup---------OTP----->>>>', Response)
-                console.log('RESPONSE apiiii  user id---------OTP----->>>>', Response.user_id)
                 var city = (Response.user_id);
+                console.log('RESPONSE    city ---------OTP----->>>>', city)
                 LoginUserId(city)
                 if (Response.status == true) {
                     alert("User Sinup successfully !");
                     navigation.navigate('Home', {
-                        user: Response.user_id
+                        user: JSON.stringify(Response.user_id)
                     })
-                    LoginUserId(city)
                 }
                 else {
                     alert("User Not Sinup !");
@@ -72,6 +87,7 @@ const OtpSinup = ({ route }) => {
                 }
             })
             .catch((error) => {
+                alert("Network Server Error");
                 console.error("ERROR FOUND" + error);
             })
     }

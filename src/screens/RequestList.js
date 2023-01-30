@@ -9,18 +9,16 @@ import {
   FlatList,
   TouchableOpacity,
   Modal,
-  ActivityIndicator
+  ActivityIndicator,TextInput
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLOR } from '../constants/colorConstants';
-import { Avatar } from 'react-native-elements';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment'
 import { moderateScale, moderateVerticalScale, scale } from "react-native-size-matters";
 import DrawerHeader from '../Components/DrawerHeader';
 import { useFocusEffect } from '@react-navigation/native';
-import { TextInput } from 'react-native';
-
+ 
 const { width, height } = Dimensions.get('window');
 const DonerList = props => {
   const navigation = props.navigation;
@@ -106,6 +104,7 @@ const DonerList = props => {
         setrequest_id(Response[0].id)
       })
       .catch((error) => {
+        // alert("Network Server Error");
         console.error("ERROR FOUND" + error);
       })
   }
@@ -164,12 +163,12 @@ const DonerList = props => {
         justifyContent: 'center',
         flexDirection: 'column',
         width: moderateScale(350),
-        height: moderateScale(180),
+        height: moderateScale(185),
         backgroundColor: 'white',
         shadowColor: '#93121B',
         borderWidth: scale(1),
         borderColor: '#93121B',
-        borderRadius: moderateScale(10),
+        borderRadius: moderateScale(5),
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.5,
         elevation: 5,
@@ -195,7 +194,7 @@ const DonerList = props => {
             alignItems: 'center',
             justifyContent: 'flex-start',
             flexDirection: 'row',
-            height: moderateScale(35),
+            height: moderateScale(30),
           }}>
             <Text style={{ fontSize: scale(15), textAlign: 'left', color: 'black', fontWeight: '500', width: '100%', }}>Organization Name :-</Text>
           </View>
@@ -243,8 +242,8 @@ const DonerList = props => {
           </View>
 
         </View>
-        <TouchableOpacity onPress={() => ModalAppoinmete(item)} style={{ height: moderateScale(50), width: '30%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B', borderRadius: moderateScale(6), marginRight: moderateScale(5), marginLeft: moderateScale(4), }}>
-          <Text style={{ fontSize: scale(14.3), textAlign: 'center', color: 'white' }}>
+        <TouchableOpacity onPress={() => ModalAppoinmete(item)} style={{ height: moderateScale(50), width: '33%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#93121B',  marginRight: moderateScale(3), marginLeft: moderateScale(4), }}>
+          <Text style={{ fontSize: scale(13.5), textAlign: 'center', color: 'white' }}>
             Re-Schedule
           </Text>
         </TouchableOpacity>

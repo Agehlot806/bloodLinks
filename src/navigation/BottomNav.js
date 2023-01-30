@@ -16,18 +16,20 @@ const Tab = createBottomTabNavigator()
 const Tabs = () => {
     return (
         <Tab.Navigator
-
+            tabBarOptions={{
+                activeTintColor: 'white',
+                inactiveTintColor: 'black',
+                scrollEnabled: false,
+            }}
             screenOptions={{
                 headerShown: false,
-                tabBarActiveBackgroundColor: 'lightgrey',
-                // tabBarVisibilityAnimationConfig: 'pink',
+                tabBarActiveBackgroundColor: 'black',
                 tabBarStyle: {
                     height: 70,
                     position: 'absolute',
                     bottom: 10,
                     right: 10,
                     left: 20,
-                    borderRadius: 10,
                     shadowColor: '#93121B',
                     shadowOffset: { width: 20, height: 6 },
                     shadowOpacity: 5,
@@ -40,7 +42,7 @@ const Tabs = () => {
                 options={{
                     tabBarLabelStyle: {
                         height: 23,
-                        fontSize: 13,
+                        fontSize: 12.6,
                         textAlign: 'center',
                         width: 90,
                         fontWeight: '700',
@@ -48,7 +50,7 @@ const Tabs = () => {
                     },
                     headerShown: false,
                     title: 'Home',
-                    tabBarIcon: ({ color }) => (
+                     tabBarIcon: ({ color }) => (
                         <Image
                             source={image.homeIcon}
                             resizeMode="contain"
@@ -68,7 +70,7 @@ const Tabs = () => {
                 options={{
                     tabBarLabelStyle: {
                         height: 23,
-                        fontSize: 13,
+                        fontSize: 12.6,
                         textAlign: 'center',
                         width: 90,
                         fontWeight: '700',
@@ -97,13 +99,13 @@ const Tabs = () => {
                 options={{
                     tabBarLabelStyle: {
                         height: 23,
-                        fontSize: 12.8,
+                        fontSize: 12.6,
                         fontWeight: '600',
                         textAlign: 'center',
                         width: 90,
                     },
                     headerShown: false,
-                    title: 'Request Blood',
+                    title: 'Request',
                     tabBarIcon: ({ color }) => (
                         <Image
                             source={image.request}
@@ -127,7 +129,7 @@ const Tabs = () => {
                 options={{
                     tabBarLabelStyle: {
                         height: 23,
-                        fontSize: 12.8,
+                        fontSize: 12.6,
                         fontWeight: '600',
                         textAlign: 'center',
                         width: 90,

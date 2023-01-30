@@ -24,10 +24,11 @@ import { Dropdown } from 'react-native-element-dropdown';
 import moment from 'moment';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Autocomplete from 'react-native-autocomplete-input';
+import { useNavigation } from '@react-navigation/native';
 
 
-const SignUp = props => {
-  const navigation = props.navigation;
+const SignUp = ({ route }) => {
+  const navigation = useNavigation();
   const [name, setname] = useState('');
   const [nameError, setnameError] = useState('');
   const [lastName, setlastName] = useState('');
@@ -36,32 +37,29 @@ const SignUp = props => {
   const [fNameError, setfNameError] = useState('');
   const [email, setemail] = useState('');
   const [emailError, setemailError] = useState('');
-  const [phone, setphone] = useState('');
+  const [phone, setphone] = useState(route.params.NumberS);
   const [phoneError, setphoneError] = useState('');
   const [gander, setgander] = useState('');
   const [address, setaddress] = useState('');
   const [addressError, setaddressError] = useState('');
+  const [blood, setblood] = useState('');
+  const [bloodError, setbloodError] = useState('');
+
   const [heightt, setheightt] = useState(0);
   const [heightt1, setheightt1] = useState(0);
-
-  const [isFocus1, setIsFocus1] = useState(false);
-  const [district, setdistrict] = useState(null);
-  const [isFocus2, setIsFocus2] = useState(false);
   const [Grey, setGrey] = useState('grey');
   const [password, setpassword] = useState('');
   const [isFocus3, setIsFocus3] = useState(false);
-  const [blood, setblood] = useState();
   const [age, setage] = useState('');
-  const [statesData, setstatesData] = useState([]);
-  const [districtsData, setdistrictsData] = useState([]);
-
   const [pickerMode, setPickerMode] = useState(null);
-  const [Dob, setDob] = useState('Please Select of Date of Birth');
+  const [Dob, setDob] = useState('Please Select Date of Birth');
 
   const [films, setFilms] = useState([]);
   const [filteredFilms, setFilteredFilms] = useState([]);
   const [selectedValue, setSelectedValue] = useState({});
+  const [selectedValueError, setselectedValueError] = useState('');
   const [selectedValue1, setSelectedValue1] = useState({});
+  const [selectedValue1Error, setselectedValue1Error] = useState('');
   const [city, setcity] = useState([]);
   const [filteredCity, setfilteredCity] = useState([]);
   const showDatePicker = () => {
@@ -76,8 +74,15 @@ const SignUp = props => {
     hidePicker();
     setDob(moment(date).format('L'))
   };
+  const IdRemve = async () => {
+    await AsyncStorage.removeItem('User')
+    const IDD = await AsyncStorage.getItem('User')
+    console.log('iddd get remove this check signuu---->>>', IDD);
+  }
+
   useEffect(() => {
-    console.log('agee---->>>', age)
+    console.log('age value get---->>>', age)
+    // setphone(route.params.NUMBER)
   }, [age]);
   const data = [
     { label: 'A+', value: '1' },
@@ -141,6 +146,8 @@ const SignUp = props => {
   }
 
   useEffect(() => {
+    IdRemve()
+    console.log('selsect item value', selectedValue)
     fetch('https://bloodlinks.in/get_states')
       .then((response) => response.json())
       .then((response) => {
@@ -152,7 +159,7 @@ const SignUp = props => {
             label: response[i].state_name,
           })
         }
-        console.log('api response ', statesArray)
+        // console.log('api response ', statesArray)
         setFilms(statesArray);
       })
       .catch((error) => {
@@ -187,9 +194,10 @@ const SignUp = props => {
           })
         }
         setcity(districtArray);
-        console.log('city api data array push',districtArray)
+        console.log('city api data array push', districtArray)
       })
       .catch((error) => {
+        alert("Network Server Error");
         console.error("ERROR FOUND" + error);
       })
   }
@@ -214,13 +222,20 @@ const SignUp = props => {
       setemailError('#85060F')
     } else if (phone == "") {
       setphoneError('#85060F')
+    } else if (Dob == 'Please Select Date of Birth') {
+      alert("Please Select Date of Birth");
     } else if (gander == "") {
       alert("Please Select Gender");
     } else if (address == "") {
       setaddressError('#85060F')
+    } else if (blood == '') {
+      setbloodError('#85060F')
+    } else if (selectedValue == '{}') {
+      setselectedValueError('#85060F')
+    } else if (selectedValue1 == {}) {
+      setselectedValue1Error('#85060F')
     } else if (age1 > 18 && age1 < 50) {
       Registered()
-      profFunct()
     } else {
       alert("Enter Age Greater then 18 & Age Less then 50");
     }
@@ -228,7 +243,7 @@ const SignUp = props => {
 
   const Registered = () => {
     let url = `https://bloodlinks.in/signup?cust_first_name=${name}
-    &cust_mid_name="gurjar"&cust_last_name="raghav"&
+    &cust_mid_name="gurjar"&cust_last_name=${lastName}&
     cust_fname=${fName}&cust_marital="Married"&
     cust_ph=${phone}&cust_gender=${gander}&
     cust_blood_group=${blood}&cust_states='1'&cust_districts='18'
@@ -241,7 +256,7 @@ const SignUp = props => {
       'Content-Type': 'application/json',
     };
     let data = {
-      cust_first_name: name, cust_mid_name: "gurjar",
+      cust_first_name: name, cust_mid_name: "",
       cust_last_name: lastName, cust_fname: fName, cust_marital: 'Married',
       cust_ph: phone, cust_gender: gander, cust_blood_group: blood,
       cust_states: 1, cust_districts: 18, cust_cities: 6581,
@@ -262,9 +277,9 @@ const SignUp = props => {
         //  const loggedIn = AsyncStorage.setItem('loggedIn', JSON.stringify(true))
         console.log('RESPONSE apiiii regisitation-------------->>>>', Response)
         setage(Response.age)
+        profFunct()
         if (Response.status == true) {
           alert("user Signup successfully");
-          profFunct()
           navigation.navigate('OtpSinup', {
             deta: data,
             num: phone,
@@ -281,10 +296,9 @@ const SignUp = props => {
 
   return (
 
-    < View style={styles.container}>
+    <View style={styles.container}>
       <StatusTopBar />
       <ScrollView style={{ flex: 1, }}>
-
         <View>
           <ImageBackground
             style={styles.loginbg}
@@ -297,13 +311,9 @@ const SignUp = props => {
                 />
               </View>
             </View>
-
             <ImageBackground
               style={styles.loginbtmimgs}
-              source={require('../assets/Images/loginBtmImage.png')}
-            >
-
-
+              source={require('../assets/Images/loginBtmImage.png')}>
               <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'} behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.forms}>
                 <View style={[styles.loginTitle, { marginTop: moderateScale(60) }]}>
                   <Text style={styles.loginTitle}>welcome to bloodlinks</Text>
@@ -408,7 +418,17 @@ const SignUp = props => {
 
                   <View style={{ flex: 1, width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: scale(30) }}>
                     <Dropdown
-                      style={[styles.input, isFocus3 && { borderColor: '#85060F' }]}
+                      style={{
+                        borderColor: blood ? Grey : bloodError,
+                        height: height * 0.07,
+                        width: width * 0.8,
+                        borderWidth: scale(1.40),
+                        padding: width * 0.03,
+                        borderRadius: 5,
+                        fontSize: scale(12), fontWeight: '400',
+                        color: 'black',
+                        marginBottom: scale(15),
+                      }}
                       placeholderStyle={styles.placeholderStyle}
                       selectedTextStyle={styles.selectedTextStyle}
                       inputSearchStyle={styles.inputSearchStyle}
@@ -435,7 +455,7 @@ const SignUp = props => {
                     <Autocomplete
                       autoCapitalize="none"
                       autoCorrect={false}
-                      inputContainerStyle={[styles.input, { justifyContent: 'center', borderColor: 'black', }]}
+                      inputContainerStyle={[styles.input, { justifyContent: 'center', borderColor: selectedValue ? 'grey' : selectedValueError }]}
                       listContainerStyle={{
                         zIndex: 1,
                         alignItems: 'center',
@@ -448,7 +468,7 @@ const SignUp = props => {
                       }}
                       placeholder="Please Select States"
                       placeholderTextColor="grey"
-
+                      borderColor={selectedValue ? 'red' : selectedValueError}
                       data={filteredFilms}
                       defaultValue={
                         JSON.stringify(selectedValue) === '{}' ?
@@ -473,39 +493,15 @@ const SignUp = props => {
 
                     />
 
-                    {/* <Dropdown
-                      style={[styles.input, isFocus2 && { borderColor: '#85060F', }]}
-                      placeholderStyle={styles.placeholderStyle}
-                      selectedTextStyle={styles.selectedTextStyle}
-                      inputSearchStyle={styles.inputSearchStyle}
-                      itemContainerStyle={{ borderColor: 'gray', borderWidth: 1.5, }}
-                      containerStyle={{ borderColor: 'gray', borderWidth: 1, }}
-                      activeColor='#FDDDE0'
-                      dropdownPosition='bottom'
-                      data={districtsData}
-                      search
-                      maxHeight={160}
-                      labelField="label"
-                      valueField="value"
-                      placeholder={'Select City'}
-                      searchPlaceholder="Search..."
-                      value={district}
-                      onFocus={() => setIsFocus2(true)}
-                      onBlur={() => setIsFocus2(false)}
-                      onChange={item => {
-                        setdistrict(item.value);
-                        setIsFocus2(false);
-                      }}
-                    /> */}
                     <Autocomplete
                       autoCapitalize="none"
                       autoCorrect={false}
-                      inputContainerStyle={[styles.input, { justifyContent: 'center', borderColor: 'black', }]}
+                      inputContainerStyle={[styles.input, { justifyContent: 'center', borderColor: 'black', borderColor: selectedValue1 ? 'grey' : selectedValue1Error }]}
                       listContainerStyle={{
                         zIndex: 2,
                         alignItems: 'center',
                         justifyContent: 'flex-end', position: 'absolute', width: '80%', top: 57, transform: [{ scale: 1 }],
-                        backgroundColor: '#E5E4E2', height: scale(heightt1), paddingLeft: scale(10),textTransform: 'uppercase',
+                        backgroundColor: '#E5E4E2', height: scale(heightt1), paddingLeft: scale(10), textTransform: 'uppercase',
                       }}
                       onChangeText={(text) => {
                         citySearch(text);
@@ -631,7 +627,8 @@ const styles = StyleSheet.create({
 
 
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: 14,
+    color: 'grey'
   },
   selectedTextStyle: {
     fontSize: 16,

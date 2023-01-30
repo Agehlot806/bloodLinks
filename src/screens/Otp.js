@@ -40,7 +40,7 @@ const Otp = ({ route }) => {
       cust_mobile: pin2,
       cust_otp: pin1,
      }
-    console.log('custom Response Api', data)
+    console.log('custom Response Api', route.params.Number)
     fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
@@ -48,14 +48,14 @@ const Otp = ({ route }) => {
       body: JSON.stringify({
         cust_mobile: route.params.Number,
         cust_otp: pin1,
-
       }),
       headers: headers,
     })
       // deta
       .then((Response) => Response.json())
       .then((Response) => {
-        console.log('RESPONSE apiiii otp verfiy ---------OTP----->>>>', Response)
+        console.log('RESPONSE apiiii  resp ---------OTP----->>>>', Response)
+        console.log('RESPONSE apiiii otp verfiy ---------OTP----->>>>', Response.data[0].user_id)
         var city = (Response.data[0].user_id);
         LoginUserId(city)
         if (Response.status == true) {
@@ -68,6 +68,7 @@ const Otp = ({ route }) => {
         }
       })
       .catch((error) => {
+        alert("Network Server Error");
         console.error("ERROR FOUND" + error);
       })
   }
@@ -92,6 +93,7 @@ const Otp = ({ route }) => {
         alert('Resend Otp Sucesfull')
       })
       .catch((error) => {
+        alert("Network Server Error");
         console.error("ERROR FOUND" + error);
       })
   }
